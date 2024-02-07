@@ -1,18 +1,9 @@
 import Link from "next/link";
+import { supabaseServerClient } from "@/app/lib/supabase";
 
-const getRooms = () => [
-  {
-    id: "00001",
-    name: "double room in badalona",
-  },
-  {
-    id: "00002",
-    name: "flat in the heart of wien",
-  },
-];
-
-export default function Rooms() {
-  const rooms = getRooms();
+const Rooms = async () => {
+  const { data, error } = await supabaseServerClient().from("rooms").select();
+  const rooms = data ?? [];
 
   return (
     <div>
@@ -25,4 +16,6 @@ export default function Rooms() {
       </ul>
     </div>
   );
-}
+};
+
+export default Rooms;
