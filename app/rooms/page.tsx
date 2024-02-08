@@ -7,12 +7,17 @@ import { ErrorMessage } from "@/components/return/ErrorMessage";
 import { Searchbox } from "@/app/rooms/Searchbox";
 import { SearchParams } from "@/utils/componentTypes";
 import { $t } from "@/utils/intl";
+import { RoomFilters } from "@/app/rooms/RoomFilters";
 
 const Rooms = async ({ searchParams }: SearchParams) => {
+  let roomsQuery = supabaseServerClient().from("room").select();
+
   const search = searchParams.name;
-  let queryRooms = supabaseServerClient().from("room").select();
-  if (search) queryRooms = queryRooms.ilike("name", `%${search}%`);
-  const { data, error } = await queryRooms;
+  const type = searchParams.type;
+  if (search) roomsQuery = roomsQuery.ilike("name", `%${search}%`);
+  if (type) roomsQuery = roomsQuery.in("type", type.split(","));
+
+  const { data, error } = await roomsQuery;
   const rooms: Room[] = data ?? [];
 
   if (error) {
@@ -26,6 +31,9 @@ const Rooms = async ({ searchParams }: SearchParams) => {
     <div className="w-5/6 flex flex-col items-center gap-4">
       <div className="w-1/2">
         <Searchbox className="w-full p-2 rounded border" param="name" />
+      </div>
+      <div className="w-1/2">
+        <RoomFilters className="w-full" />
       </div>
       <ul className="grid grid-cols-3 gap-6">
         <For each={rooms} fallback={fallback}>
