@@ -9,7 +9,7 @@ import { $t } from "@/utils/intl";
 
 const Room = async ({ params: { id } }: IdRouteParams) => {
   const { data, error } = await supabaseServerClient()
-    .from("rooms")
+    .from("room")
     .select("id, cover_photo, name, location")
     .eq("id", id)
     .limit(1);
