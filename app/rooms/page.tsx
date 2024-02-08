@@ -6,7 +6,7 @@ import { For } from "@/components/controlFlow/For/For";
 import { ErrorMessage } from "@/components/return/ErrorMessage";
 
 const Rooms = async () => {
-  const { data, error } = await supabaseServerClient().from("rooms").select();
+  const { data, error } = await supabaseServerClient().from("room").select();
   const rooms: Room[] = data ?? [];
 
   if (error) {
