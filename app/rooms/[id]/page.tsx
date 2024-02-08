@@ -6,11 +6,12 @@ import Icon from "@/components/Icon";
 import { Room as RoomType } from "@/app/rooms/types";
 import { ErrorMessage } from "@/components/return/ErrorMessage";
 import { $t } from "@/utils/intl";
+import { getRoomTypeLabel } from "@/app/rooms/getRoomTypeLabel";
 
 const Room = async ({ params: { id } }: IdRouteParams) => {
   const { data, error } = await supabaseServerClient()
     .from("room")
-    .select("id, cover_photo, name, location")
+    .select("id, cover_photo, name, location, type")
     .eq("id", id)
     .limit(1);
 
@@ -21,13 +22,13 @@ const Room = async ({ params: { id } }: IdRouteParams) => {
     return <ErrorMessage />;
   }
 
-  const { cover_photo, location, name } = room as RoomType;
+  const { cover_photo, location, name, type } = room as RoomType;
 
   const [lat, long] = location?.split(",") ?? [];
   const mapLink = `https://www.openstreetmap.org/#map=18/${lat}/${long}`;
 
   return (
-    <div>
+    <div className="flex flex-col gap-1">
       <h3>{name}</h3>
       <Show when={cover_photo}>
         {(photo) => (
@@ -35,11 +36,17 @@ const Room = async ({ params: { id } }: IdRouteParams) => {
         )}
       </Show>
       <Show when={location}>
-        <a className="flex items-center gap-1" href={mapLink} target="_blank">
-          <Icon name="open_in_new" />
-          <span>{$t("see on openstreetmap")}</span>
-        </a>
+        <div className="flex gap-1">
+          {$t("location")}:
+          <a className="flex items-center gap-1" href={mapLink} target="_blank">
+            <Icon name="open_in_new" />
+            <span>{$t("see on openstreetmap")}</span>
+          </a>
+        </div>
       </Show>
+      <div className="flex gap-1">
+        {$t("type")}:<span>{getRoomTypeLabel(type)}</span>
+      </div>
     </div>
   );
 };
