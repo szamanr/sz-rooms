@@ -2,7 +2,7 @@ import React from "react";
 import { For } from "@/components/controlFlow/For/For";
 import { twClass } from "@/utils/twClass";
 import { Filter } from "@/components/Filter";
-import { $t } from "@/utils/intl";
+import { getRoomTypeLabel } from "@/app/rooms/getRoomTypeLabel";
 
 type Props = {
   className?: string;
@@ -14,8 +14,8 @@ export const RoomFilters: React.FC<Props> = ({ className }) => {
       id: "type",
       name: "type",
       options: [
-        { id: "room", label: $t("Room") },
-        { id: "flat", label: $t("Flat") },
+        { id: "room", label: getRoomTypeLabel("room") },
+        { id: "flat", label: getRoomTypeLabel("flat") },
       ],
       value: [],
     },
