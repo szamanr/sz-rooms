@@ -8,7 +8,7 @@ export default function Layout({ children }: ParentComponentProps) {
     <div>
       <NavBar>
         <Link href="/rooms">
-          <Icon name="chevron_left" />
+          <Icon name="chevron_left" size="2xl" />
         </Link>
       </NavBar>
       {children}
