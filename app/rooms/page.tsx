@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { supabaseServerClient } from "@/app/lib/supabase";
-import { Room } from "@/app/rooms/types";
+import { supabaseServerClient } from "@/api/supabase";
 import Image from "next/image";
 import { For } from "@/components/controlFlow/For/For";
 import { ErrorMessage } from "@/components/return/ErrorMessage";
@@ -18,7 +17,7 @@ const Rooms = async ({ searchParams }: SearchParams) => {
   if (type) roomsQuery = roomsQuery.in("type", type.split(","));
 
   const { data, error } = await roomsQuery;
-  const rooms: Room[] = data ?? [];
+  const rooms = data ?? [];
 
   if (error) {
     console.error(error);

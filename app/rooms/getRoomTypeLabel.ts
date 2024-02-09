@@ -1,7 +1,7 @@
 import { $t } from "@/utils/intl";
-import { RoomType } from "@/app/rooms/types";
+import { Enums } from "@/api/schema.types";
 
-export const getRoomTypeLabel = (roomType: RoomType) => {
+export const getRoomTypeLabel = (roomType: Enums<"room_type">) => {
   switch (roomType) {
     case "flat":
       return $t("Flat");
