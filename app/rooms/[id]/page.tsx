@@ -1,9 +1,8 @@
 import { IdRouteParams } from "@/utils/componentTypes";
-import { supabaseServerClient } from "@/app/lib/supabase";
+import { supabaseServerClient } from "@/api/supabase";
 import { Show } from "@/components/controlFlow/Show/Show";
 import Image from "next/image";
 import Icon from "@/components/Icon";
-import { Room as RoomType } from "@/app/rooms/types";
 import { ErrorMessage } from "@/components/return/ErrorMessage";
 import { $t } from "@/utils/intl";
 import { getRoomTypeLabel } from "@/app/rooms/getRoomTypeLabel";
@@ -22,7 +21,7 @@ const Room = async ({ params: { id } }: IdRouteParams) => {
     return <ErrorMessage />;
   }
 
-  const { cover_photo, location, name, type } = room as RoomType;
+  const { cover_photo, location, name, type } = room;
 
   const [lat, long] = location?.split(",") ?? [];
   const mapLink = `https://www.openstreetmap.org/#map=18/${lat}/${long}`;
@@ -44,9 +43,13 @@ const Room = async ({ params: { id } }: IdRouteParams) => {
           </a>
         </div>
       </Show>
-      <div className="flex gap-1">
-        {$t("type")}:<span>{getRoomTypeLabel(type)}</span>
-      </div>
+      <Show when={type}>
+        {(roomType) => (
+          <div className="flex gap-1">
+            {$t("type")}:<span>{getRoomTypeLabel(roomType)}</span>
+          </div>
+        )}
+      </Show>
     </div>
   );
 };
