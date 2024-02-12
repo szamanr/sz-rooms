@@ -6,11 +6,18 @@ import Icon from "@/components/Icon";
 import { ErrorMessage } from "@/components/return/ErrorMessage";
 import { $t } from "@/utils/intl";
 import { getRoomTypeLabel } from "@/app/rooms/getRoomTypeLabel";
+import { For } from "@/components/controlFlow/For/For";
 
 const Room = async ({ params: { id } }: IdRouteParams) => {
   const { data, error } = await supabaseServerClient()
     .from("room")
-    .select("id, cover_photo, name, location, type")
+    .select(
+      `id, cover_photo, currency, default_min_stay, default_price, name, location, type, 
+      availability(
+        id, start_date, end_date, price, min_stay
+      )
+      `,
+    )
     .eq("id", id)
     .limit(1);
 
@@ -21,7 +28,16 @@ const Room = async ({ params: { id } }: IdRouteParams) => {
     return <ErrorMessage />;
   }
 
-  const { cover_photo, location, name, type } = room;
+  const {
+    availability,
+    cover_photo,
+    currency,
+    default_min_stay,
+    default_price,
+    location,
+    name,
+    type,
+  } = room;
 
   const [lat, long] = location?.split(",") ?? [];
   const mapLink = `https://www.openstreetmap.org/#map=18/${lat}/${long}`;
@@ -50,6 +66,35 @@ const Room = async ({ params: { id } }: IdRouteParams) => {
           </div>
         )}
       </Show>
+      <div>
+        <h4>{$t("Available dates:")}</h4>
+        <ul>
+          <For
+            each={availability}
+            fallback={
+              <span className="text-gray-500">{$t("No available dates")}</span>
+            }
+          >
+            {({ start_date, end_date, price, min_stay }) => (
+              <li className="flex gap-1 w-[36rem] grid grid-cols-4">
+                <span className="col-span-2">
+                  {start_date} - {end_date}
+                </span>
+                <span>
+                  {price ?? default_price} {currency}
+                </span>
+                <Show when={min_stay || default_min_stay || null}>
+                  {(minDays) => (
+                    <span>
+                      {$t("{number} days minimum", { number: minDays })}
+                    </span>
+                  )}
+                </Show>
+              </li>
+            )}
+          </For>
+        </ul>
+      </div>
     </div>
   );
 };
