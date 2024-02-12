@@ -9,10 +9,51 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      availability: {
+        Row: {
+          created_at: string
+          end_date: string
+          id: number
+          min_stay: number | null
+          price: number | null
+          room_id: number
+          start_date: string
+        }
+        Insert: {
+          created_at?: string
+          end_date: string
+          id?: number
+          min_stay?: number | null
+          price?: number | null
+          room_id: number
+          start_date: string
+        }
+        Update: {
+          created_at?: string
+          end_date?: string
+          id?: number
+          min_stay?: number | null
+          price?: number | null
+          room_id?: number
+          start_date?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "availability_room_id_fkey"
+            columns: ["room_id"]
+            isOneToOne: false
+            referencedRelation: "room"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       room: {
         Row: {
           cover_photo: string | null
           created_at: string
+          currency: Database["public"]["Enums"]["currency"] | null
+          default_min_stay: number
+          default_price: number | null
           id: number
           location: string
           name: string
@@ -21,6 +62,9 @@ export type Database = {
         Insert: {
           cover_photo?: string | null
           created_at?: string
+          currency?: Database["public"]["Enums"]["currency"] | null
+          default_min_stay?: number
+          default_price?: number | null
           id?: number
           location?: string
           name: string
@@ -29,6 +73,9 @@ export type Database = {
         Update: {
           cover_photo?: string | null
           created_at?: string
+          currency?: Database["public"]["Enums"]["currency"] | null
+          default_min_stay?: number
+          default_price?: number | null
           id?: number
           location?: string
           name?: string
@@ -44,6 +91,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
+      currency: "EUR" | "USD"
       room_type: "room" | "flat"
     }
     CompositeTypes: {
