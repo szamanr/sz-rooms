@@ -76,7 +76,7 @@ const Room = async ({ params: { id } }: IdRouteParams) => {
             }
           >
             {({ start_date, end_date, price, min_stay }) => (
-              <li className="flex gap-1 w-[36rem] grid grid-cols-4">
+              <li className="flex gap-1 w-page-small grid grid-cols-4">
                 <span className="col-span-2">
                   {start_date} - {end_date}
                 </span>
