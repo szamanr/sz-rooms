@@ -27,6 +27,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@headlessui/react", "virtual:eb77c34dba45f33c2be1a084126f68c8d703de17fa1adf56972c76be8e90cbfdd186f7954a6eb4ee657bbeb813d4a56f89817354b5d74991bad530b644cc8214#npm:1.7.18"],\
+          ["@supabase/auth-helpers-nextjs", "virtual:eb77c34dba45f33c2be1a084126f68c8d703de17fa1adf56972c76be8e90cbfdd186f7954a6eb4ee657bbeb813d4a56f89817354b5d74991bad530b644cc8214#npm:0.9.0"],\
           ["@supabase/ssr", "virtual:eb77c34dba45f33c2be1a084126f68c8d703de17fa1adf56972c76be8e90cbfdd186f7954a6eb4ee657bbeb813d4a56f89817354b5d74991bad530b644cc8214#npm:0.1.0"],\
           ["@supabase/supabase-js", "npm:2.39.3"],\
           ["@types/lodash", "npm:4.14.202"],\
@@ -442,6 +443,53 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/@rushstack-eslint-patch-npm-1.7.2-e0ac536367-10c0.zip/node_modules/@rushstack/eslint-patch/",\
         "packageDependencies": [\
           ["@rushstack/eslint-patch", "npm:1.7.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@supabase/auth-helpers-nextjs", [\
+      ["npm:0.9.0", {\
+        "packageLocation": "../../../.yarn/berry/cache/@supabase-auth-helpers-nextjs-npm-0.9.0-6a960fd853-10c0.zip/node_modules/@supabase/auth-helpers-nextjs/",\
+        "packageDependencies": [\
+          ["@supabase/auth-helpers-nextjs", "npm:0.9.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:eb77c34dba45f33c2be1a084126f68c8d703de17fa1adf56972c76be8e90cbfdd186f7954a6eb4ee657bbeb813d4a56f89817354b5d74991bad530b644cc8214#npm:0.9.0", {\
+        "packageLocation": "./.yarn/__virtual__/@supabase-auth-helpers-nextjs-virtual-aba6dbdaa4/4/.yarn/berry/cache/@supabase-auth-helpers-nextjs-npm-0.9.0-6a960fd853-10c0.zip/node_modules/@supabase/auth-helpers-nextjs/",\
+        "packageDependencies": [\
+          ["@supabase/auth-helpers-nextjs", "virtual:eb77c34dba45f33c2be1a084126f68c8d703de17fa1adf56972c76be8e90cbfdd186f7954a6eb4ee657bbeb813d4a56f89817354b5d74991bad530b644cc8214#npm:0.9.0"],\
+          ["@supabase/auth-helpers-shared", "virtual:aba6dbdaa48aa973dd8871071216de6aa5da5ae3759debabacbeb39a40bd7485bd3b69cd7e6ceabb3ce5dabdf4d36c2291d6ab747d7063e34dc1895fcc4cda27#npm:0.6.3"],\
+          ["@supabase/supabase-js", "npm:2.39.3"],\
+          ["@types/supabase__supabase-js", null],\
+          ["set-cookie-parser", "npm:2.6.0"]\
+        ],\
+        "packagePeers": [\
+          "@supabase/supabase-js",\
+          "@types/supabase__supabase-js"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@supabase/auth-helpers-shared", [\
+      ["npm:0.6.3", {\
+        "packageLocation": "../../../.yarn/berry/cache/@supabase-auth-helpers-shared-npm-0.6.3-f0fd8cd26a-10c0.zip/node_modules/@supabase/auth-helpers-shared/",\
+        "packageDependencies": [\
+          ["@supabase/auth-helpers-shared", "npm:0.6.3"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:aba6dbdaa48aa973dd8871071216de6aa5da5ae3759debabacbeb39a40bd7485bd3b69cd7e6ceabb3ce5dabdf4d36c2291d6ab747d7063e34dc1895fcc4cda27#npm:0.6.3", {\
+        "packageLocation": "./.yarn/__virtual__/@supabase-auth-helpers-shared-virtual-bfbee292c2/4/.yarn/berry/cache/@supabase-auth-helpers-shared-npm-0.6.3-f0fd8cd26a-10c0.zip/node_modules/@supabase/auth-helpers-shared/",\
+        "packageDependencies": [\
+          ["@supabase/auth-helpers-shared", "virtual:aba6dbdaa48aa973dd8871071216de6aa5da5ae3759debabacbeb39a40bd7485bd3b69cd7e6ceabb3ce5dabdf4d36c2291d6ab747d7063e34dc1895fcc4cda27#npm:0.6.3"],\
+          ["@supabase/supabase-js", "npm:2.39.3"],\
+          ["@types/supabase__supabase-js", null],\
+          ["jose", "npm:4.15.4"]\
+        ],\
+        "packagePeers": [\
+          "@supabase/supabase-js",\
+          "@types/supabase__supabase-js"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3037,6 +3085,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["jose", [\
+      ["npm:4.15.4", {\
+        "packageLocation": "../../../.yarn/berry/cache/jose-npm-4.15.4-c518ec3da8-10c0.zip/node_modules/jose/",\
+        "packageDependencies": [\
+          ["jose", "npm:4.15.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["js-tokens", [\
       ["npm:4.0.0", {\
         "packageLocation": "../../../.yarn/berry/cache/js-tokens-npm-4.0.0-0ac852e9e2-10c0.zip/node_modules/js-tokens/",\
@@ -3519,6 +3576,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["nextjs-001", "workspace:."],\
           ["@headlessui/react", "virtual:eb77c34dba45f33c2be1a084126f68c8d703de17fa1adf56972c76be8e90cbfdd186f7954a6eb4ee657bbeb813d4a56f89817354b5d74991bad530b644cc8214#npm:1.7.18"],\
+          ["@supabase/auth-helpers-nextjs", "virtual:eb77c34dba45f33c2be1a084126f68c8d703de17fa1adf56972c76be8e90cbfdd186f7954a6eb4ee657bbeb813d4a56f89817354b5d74991bad530b644cc8214#npm:0.9.0"],\
           ["@supabase/ssr", "virtual:eb77c34dba45f33c2be1a084126f68c8d703de17fa1adf56972c76be8e90cbfdd186f7954a6eb4ee657bbeb813d4a56f89817354b5d74991bad530b644cc8214#npm:0.1.0"],\
           ["@supabase/supabase-js", "npm:2.39.3"],\
           ["@types/lodash", "npm:4.14.202"],\
@@ -4345,6 +4403,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["semver", "npm:7.6.0"],\
           ["lru-cache", "npm:6.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["set-cookie-parser", [\
+      ["npm:2.6.0", {\
+        "packageLocation": "../../../.yarn/berry/cache/set-cookie-parser-npm-2.6.0-a7dd154236-10c0.zip/node_modules/set-cookie-parser/",\
+        "packageDependencies": [\
+          ["set-cookie-parser", "npm:2.6.0"]\
         ],\
         "linkType": "HARD"\
       }]\

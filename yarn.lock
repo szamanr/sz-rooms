@@ -306,6 +306,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@supabase/auth-helpers-nextjs@npm:^0.9.0":
+  version: 0.9.0
+  resolution: "@supabase/auth-helpers-nextjs@npm:0.9.0"
+  dependencies:
+    "@supabase/auth-helpers-shared": "npm:0.6.3"
+    set-cookie-parser: "npm:^2.6.0"
+  peerDependencies:
+    "@supabase/supabase-js": ^2.19.0
+  checksum: 10c0/05faa68e3afcd467126134f0a2f3fd6d19592672b15c2685f5cf50300735823a8213ed8e646a8d2558e2e085a81af7e468091678376c71e9777f64c136fb9169
+  languageName: node
+  linkType: hard
+
+"@supabase/auth-helpers-shared@npm:0.6.3":
+  version: 0.6.3
+  resolution: "@supabase/auth-helpers-shared@npm:0.6.3"
+  dependencies:
+    jose: "npm:^4.14.4"
+  peerDependencies:
+    "@supabase/supabase-js": ^2.19.0
+  checksum: 10c0/8220ceba8e6418df9779464a43d4801bf1758764350335b3dc5d0ad88785e7b6b428b473a639b249a4f83f694e880fc2713b3b8d753df1cac9104dd7e5935f13
+  languageName: node
+  linkType: hard
+
 "@supabase/functions-js@npm:^2.1.5":
   version: 2.2.0
   resolution: "@supabase/functions-js@npm:2.2.0"
@@ -2422,6 +2445,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jose@npm:^4.14.4":
+  version: 4.15.4
+  resolution: "jose@npm:4.15.4"
+  checksum: 10c0/ce8b29f84d6172a566b12b599dafa82f3bef0f16278bb76d562490ac1516fcc14017b05a39d20ffad25ed504f4996d4af4c9d3e0273d95b2d5559bf6d1112bc0
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0 || ^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -2866,6 +2896,7 @@ __metadata:
   resolution: "nextjs-001@workspace:."
   dependencies:
     "@headlessui/react": "npm:^1.7.18"
+    "@supabase/auth-helpers-nextjs": "npm:^0.9.0"
     "@supabase/ssr": "npm:^0.1.0"
     "@supabase/supabase-js": "npm:^2.39.3"
     "@types/lodash": "npm:^4.14.202"
@@ -3575,6 +3606,13 @@ __metadata:
   bin:
     semver: bin/semver.js
   checksum: 10c0/fbfe717094ace0aa8d6332d7ef5ce727259815bd8d8815700853f4faf23aacbd7192522f0dc5af6df52ef4fa85a355ebd2f5d39f554bd028200d6cf481ab9b53
+  languageName: node
+  linkType: hard
+
+"set-cookie-parser@npm:^2.6.0":
+  version: 2.6.0
+  resolution: "set-cookie-parser@npm:2.6.0"
+  checksum: 10c0/739da029f0e56806a103fcd5501d9c475e19e77bd8274192d7ae5c374ae714a82bba9a7ac00b0330a18227c5644b08df9e442240527be578f5a6030f9bb2bb80
   languageName: node
   linkType: hard
 
