@@ -7,9 +7,14 @@ import { LogoutButton } from "@/components/navbar/LogoutButton";
 
 export const LogInButton: React.FC = () => {
   return (
-    <Link className="" href="/login">
-      {$t("Log in")}
-    </Link>
+    <div className="divide-x divide-gray-300 *:px-1">
+      <Link className="" href="/signup">
+        {$t("Sign up")}
+      </Link>
+      <Link className="" href="/login">
+        {$t("Log in")}
+      </Link>
+    </div>
   );
 };
 
