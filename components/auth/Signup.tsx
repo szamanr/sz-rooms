@@ -4,14 +4,23 @@ import { supabaseClient } from "@/api/supabaseClient";
 import { useState } from "react";
 import { Show } from "../controlFlow/Show/Show";
 import { useRouter } from "next/navigation";
+import invariant from "tiny-invariant";
 
 const Signup = () => {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string>();
   const id = Math.floor(Math.random() * 100_000);
 
-  const signUp = async (email: string, password: string) => {
-    setErrorMessage(undefined);
+  const signUp = async (formData: FormData) => {
+    "use server";
+    // setErrorMessage(undefined);
+
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    invariant(email);
+    invariant(password);
+
     const { data, error } = await supabaseClient().auth.signUp({
       email,
       password,
@@ -22,7 +31,7 @@ const Signup = () => {
 
     if (error) {
       console.error(error);
-      setErrorMessage(error.message);
+      // setErrorMessage(error.message);
       return;
     }
 
@@ -33,13 +42,18 @@ const Signup = () => {
   return (
     <div className="w-full h-full">
       <h3>{$t("Sign up")}</h3>
-      <div>[TODO add form here]</div>
-      <Show when={errorMessage}>
-        <div className="text-red-500">{errorMessage}</div>
-      </Show>
-      <button onClick={() => signUp(`user-${id}@example.org`, "Test1234!")}>
-        {$t("Submit")}
-      </button>
+      <form action={signUp}>
+        <label htmlFor="email">{$t("Email:")}</label>
+        <input id="email" type="email" />
+
+        <label htmlFor="password">{$t("Password:")}</label>
+        <input id="password" type="password" />
+
+        <Show when={errorMessage}>
+          <div className="text-red-500">{errorMessage}</div>
+        </Show>
+        <button type="submit">{$t("Submit")}</button>
+      </form>
     </div>
   );
 };
