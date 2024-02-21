@@ -1,58 +1,66 @@
-"use client";
 import { $t } from "@/utils/intl";
-import { supabaseClient } from "@/api/supabaseClient";
-import { useState } from "react";
-import { Show } from "../controlFlow/Show/Show";
-import { useRouter } from "next/navigation";
 import invariant from "tiny-invariant";
+import { supabaseServerClient } from "@/api/supabaseServer";
+import { redirect } from "next/navigation";
 
 const Signup = () => {
-  const router = useRouter();
-  const [errorMessage, setErrorMessage] = useState<string>();
-  const id = Math.floor(Math.random() * 100_000);
-
   const signUp = async (formData: FormData) => {
     "use server";
-    // setErrorMessage(undefined);
 
-    const email = formData.get("email");
-    const password = formData.get("password");
+    const email = formData.get("email") as Maybe<string>;
+    const password = formData.get("password") as Maybe<string>;
 
     invariant(email);
     invariant(password);
 
-    const { data, error } = await supabaseClient().auth.signUp({
+    const { data, error } = await supabaseServerClient().auth.signUp({
       email,
       password,
       options: {
-        emailRedirectTo: `${location.origin}/auth/callback`,
+        emailRedirectTo: `localhost:3000/auth/callback`,
       },
     });
 
     if (error) {
       console.error(error);
-      // setErrorMessage(error.message);
       return;
     }
 
-    router.back();
-    router.refresh();
+    console.debug(data);
+
+    redirect("/");
   };
 
   return (
     <div className="w-full h-full">
       <h3>{$t("Sign up")}</h3>
-      <form action={signUp}>
-        <label htmlFor="email">{$t("Email:")}</label>
-        <input id="email" type="email" />
+      <form action={signUp} className="space-y-2">
+        <div className="flex items-center space-x-2 w-full">
+          <label htmlFor="email">{$t("Email:")}</label>
+          <input
+            className="border rounded border-gray-300 p-1 grow shrink"
+            id="email"
+            name="email"
+            type="email"
+          />
+        </div>
 
-        <label htmlFor="password">{$t("Password:")}</label>
-        <input id="password" type="password" />
+        <div className="flex items-center space-x-2 w-full">
+          <label htmlFor="password">{$t("Password:")}</label>
+          <input
+            className="border rounded border-gray-300 p-1 grow shrink"
+            id="password"
+            name="password"
+            type="password"
+          />
+        </div>
 
-        <Show when={errorMessage}>
-          <div className="text-red-500">{errorMessage}</div>
-        </Show>
-        <button type="submit">{$t("Submit")}</button>
+        <button
+          className="bg-amber-500 text-white rounded px-2 py-1 font-semibold hover:bg-amber-600"
+          type="submit"
+        >
+          {$t("Submit")}
+        </button>
       </form>
     </div>
   );
