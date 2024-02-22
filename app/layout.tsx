@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { NavBar } from "@/components/NavBar";
+import { NavBar } from "@/components/navbar/NavBar";
 import { twClass } from "@/utils/twClass";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -13,9 +13,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+  modal,
+}: {
   children: React.ReactNode;
-}>) {
+  modal: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body className={twClass(inter.className, "")}>
@@ -23,6 +25,7 @@ export default function RootLayout({
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
           {children}
         </main>
+        {modal}
       </body>
     </html>
   );
