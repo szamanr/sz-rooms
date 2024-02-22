@@ -1,33 +1,7 @@
 import { $t } from "@/utils/intl";
-import invariant from "tiny-invariant";
-import { supabaseServerClient } from "@/api/supabaseServer";
-import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
+import { signUp } from "@/app/login/actions";
 
 const Signup = () => {
-  const signUp = async (formData: FormData) => {
-    "use server";
-
-    const email = formData.get("email") as Maybe<string>;
-    const password = formData.get("password") as Maybe<string>;
-
-    invariant(email);
-    invariant(password);
-
-    const { data, error } = await supabaseServerClient().auth.signUp({
-      email,
-      password,
-    });
-
-    if (error) {
-      console.error(error);
-      return;
-    }
-
-    revalidatePath("/", "layout");
-    redirect("/");
-  };
-
   return (
     <div className="w-full h-full">
       <h3>{$t("Sign up")}</h3>

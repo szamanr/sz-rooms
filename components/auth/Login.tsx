@@ -1,41 +1,53 @@
 "use client";
 import { $t } from "@/utils/intl";
-import { supabaseClient } from "@/api/supabaseClient";
 import { useState } from "react";
 import { Show } from "../controlFlow/Show/Show";
-import { useRouter } from "next/navigation";
+import Icon from "@/components/Icon";
+import { logIn } from "@/app/login/actions";
 
 const Login = () => {
-  const router = useRouter();
-  const [errorMessage, setErrorMessage] = useState<string>();
-
-  const logIn = async (email: string, password: string) => {
-    setErrorMessage(undefined);
-    const { data, error } = await supabaseClient().auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      console.error(error);
-      setErrorMessage(error.message);
-      return;
-    }
-
-    router.back();
-    router.refresh();
-  };
+  const [loading, setLoading] = useState(false);
 
   return (
     <div className="w-full h-full">
       <h3>{$t("Log in")}</h3>
-      <div>[TODO add form here]</div>
-      <Show when={errorMessage}>
-        <div className="text-red-500">{errorMessage}</div>
-      </Show>
-      <button onClick={() => logIn("user001@example.org", "Test1234!")}>
-        {$t("Submit")}
-      </button>
+
+      <form action={logIn} className="space-y-2">
+        <div className="flex items-center space-x-2 w-full">
+          <label htmlFor="email">{$t("Email:")}</label>
+          <input
+            className="border rounded border-gray-300 p-1 grow shrink"
+            id="email"
+            name="email"
+            type="email"
+          />
+        </div>
+
+        <div className="flex items-center space-x-2 w-full">
+          <label htmlFor="password">{$t("Password:")}</label>
+          <input
+            className="border rounded border-gray-300 p-1 grow shrink"
+            id="password"
+            name="password"
+            type="password"
+          />
+        </div>
+
+        {/*<Show when={errorMessage}>*/}
+        {/*  <div className="text-red-500">{errorMessage}</div>*/}
+        {/*</Show>*/}
+
+        <button
+          className="bg-amber-500 text-white rounded px-2 py-1 font-semibold hover:bg-amber-600 flex items-center gap-2"
+          onClick={setLoading.bind(null, true)}
+          type="submit"
+        >
+          <Show when={loading}>
+            <Icon className="animate-pulse" name="hourglass" />
+          </Show>
+          {$t("Submit")}
+        </button>
+      </form>
     </div>
   );
 };
