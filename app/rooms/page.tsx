@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { supabaseServerClient } from "@/api/supabase";
+import { supabaseServerClient } from "@/api/supabaseServer";
 import Image from "next/image";
 import { For } from "@/components/controlFlow/For/For";
 import { ErrorMessage } from "@/components/return/ErrorMessage";

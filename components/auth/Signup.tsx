@@ -1,18 +1,17 @@
 "use client";
 import { $t } from "@/utils/intl";
+import { signUp } from "@/app/login/actions";
 import { useState } from "react";
-import { Show } from "../controlFlow/Show/Show";
+import { Show } from "@/components/controlFlow/Show/Show";
 import Icon from "@/components/Icon";
-import { logIn } from "@/app/login/actions";
 
-const Login = () => {
+const Signup = () => {
   const [loading, setLoading] = useState(false);
 
   return (
     <div className="w-full h-full">
-      <h3>{$t("Log in")}</h3>
-
-      <form action={logIn} className="space-y-2">
+      <h3>{$t("Sign up")}</h3>
+      <form action={signUp} className="space-y-2">
         <div className="flex items-center space-x-2 w-full">
           <label htmlFor="email">{$t("Email:")}</label>
           <input
@@ -53,4 +52,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

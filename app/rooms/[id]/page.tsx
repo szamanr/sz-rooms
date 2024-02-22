@@ -1,5 +1,5 @@
 import { IdRouteParams } from "@/utils/componentTypes";
-import { supabaseServerClient } from "@/api/supabase";
+import { supabaseServerClient } from "@/api/supabaseServer";
 import { Show } from "@/components/controlFlow/Show/Show";
 import Image from "next/image";
 import Icon from "@/components/Icon";

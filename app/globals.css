@@ -12,3 +12,31 @@ body {
     text-wrap: balance;
   }
 }
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold;
+}
+
+h1 {
+  @apply text-2xl py-4;
+}
+
+h2 {
+  @apply text-xl py-4;
+}
+
+h3 {
+  @apply text-lg py-2;
+}
+
+h4 {
+  @apply text-base py-2;
+}
+
+h5 {
+  @apply text-sm;
+}
+
+h6 {
+  @apply text-xs;
+}
