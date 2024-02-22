@@ -1,19 +1,41 @@
 import { cookies } from "next/headers";
 import { Database } from "@/api/schema.types";
 import invariant from "tiny-invariant";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { CookieOptions, createServerClient } from "@supabase/ssr";
 
 export const supabaseServerClient = () => {
   invariant(process.env.NEXT_PUBLIC_SUPABASE_URL);
   invariant(process.env.NEXT_PUBLIC_SUPABASE_KEY);
 
-  return createServerComponentClient<Database>(
+  const cookieStore = cookies();
+
+  return createServerClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_KEY,
     {
-      cookies,
-    },
-    {
-      supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
-      supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_KEY,
+      cookies: {
+        get(name: string) {
+          return cookieStore.get(name)?.value;
+        },
+        set(name: string, value: string, options: CookieOptions) {
+          try {
+            cookieStore.set({ name, value, ...options });
+          } catch (error) {
+            // The `set` method was called from a Server Component.
+            // This can be ignored if you have middleware refreshing
+            // user sessions.
+          }
+        },
+        remove(name: string, options: CookieOptions) {
+          try {
+            cookieStore.set({ name, value: "", ...options });
+          } catch (error) {
+            // The `delete` method was called from a Server Component.
+            // This can be ignored if you have middleware refreshing
+            // user sessions.
+          }
+        },
+      },
     },
   );
 };

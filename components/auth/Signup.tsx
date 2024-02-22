@@ -2,6 +2,7 @@ import { $t } from "@/utils/intl";
 import invariant from "tiny-invariant";
 import { supabaseServerClient } from "@/api/supabaseServer";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 const Signup = () => {
   const signUp = async (formData: FormData) => {
@@ -16,9 +17,6 @@ const Signup = () => {
     const { data, error } = await supabaseServerClient().auth.signUp({
       email,
       password,
-      options: {
-        emailRedirectTo: `localhost:3000/auth/callback`,
-      },
     });
 
     if (error) {
@@ -26,8 +24,7 @@ const Signup = () => {
       return;
     }
 
-    console.debug(data);
-
+    revalidatePath("/", "layout");
     redirect("/");
   };
 
