@@ -1,7 +1,13 @@
+"use client";
 import { $t } from "@/utils/intl";
 import { signUp } from "@/app/login/actions";
+import { useState } from "react";
+import { Show } from "@/components/controlFlow/Show/Show";
+import Icon from "@/components/Icon";
 
 const Signup = () => {
+  const [loading, setLoading] = useState(false);
+
   return (
     <div className="w-full h-full">
       <h3>{$t("Sign up")}</h3>
@@ -26,10 +32,19 @@ const Signup = () => {
           />
         </div>
 
+        {/* TODO: handle error from server */}
+        {/*<Show when={errorMessage}>*/}
+        {/*  <div className="text-red-500">{errorMessage}</div>*/}
+        {/*</Show>*/}
+
         <button
-          className="bg-amber-500 text-white rounded px-2 py-1 font-semibold hover:bg-amber-600"
+          className="bg-amber-500 text-white rounded px-2 py-1 font-semibold hover:bg-amber-600 flex items-center gap-2"
+          onClick={setLoading.bind(null, true)}
           type="submit"
         >
+          <Show when={loading}>
+            <Icon className="animate-pulse" name="hourglass" />
+          </Show>
           {$t("Submit")}
         </button>
       </form>

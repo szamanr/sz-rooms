@@ -33,6 +33,7 @@ const Login = () => {
           />
         </div>
 
+        {/* TODO: handle error from server */}
         {/*<Show when={errorMessage}>*/}
         {/*  <div className="text-red-500">{errorMessage}</div>*/}
         {/*</Show>*/}
