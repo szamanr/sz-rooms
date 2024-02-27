@@ -7,12 +7,16 @@ import { ErrorMessage } from "@/components/return/ErrorMessage";
 import { $t } from "@/utils/intl";
 import { getRoomTypeLabel } from "@/app/rooms/getRoomTypeLabel";
 import { For } from "@/components/controlFlow/For/For";
+import { ButtonLink } from "@/components/ButtonLink";
 
 const Room = async ({ params: { id } }: IdRouteParams) => {
+  const currentUser = (await supabaseServerClient().auth.getSession()).data
+    .session?.user;
+
   const { data, error } = await supabaseServerClient()
     .from("room")
     .select(
-      `id, cover_photo, currency, default_min_stay, default_price, name, location, type, 
+      `id, cover_photo, currency, default_min_stay, default_price, name, location, type, owner_id, 
       availability(
         id, start_date, end_date, price, min_stay
       )
@@ -36,8 +40,11 @@ const Room = async ({ params: { id } }: IdRouteParams) => {
     default_price,
     location,
     name,
+    owner_id,
     type,
   } = room;
+
+  const isOwner = owner_id && currentUser && owner_id === currentUser.id;
 
   const [lat, long] = location?.split(",") ?? [];
   const mapLink = `https://www.openstreetmap.org/#map=18/${lat}/${long}`;
@@ -65,6 +72,12 @@ const Room = async ({ params: { id } }: IdRouteParams) => {
             {$t("type")}:<span>{getRoomTypeLabel(roomType)}</span>
           </div>
         )}
+      </Show>
+      <Show when={isOwner}>
+        <ButtonLink href={`/rooms/${id}/admin`}>
+          <Icon name="settings" />
+          <span>{$t("Admin panel")}</span>
+        </ButtonLink>
       </Show>
       <div>
         <h4>{$t("Available dates:")}</h4>
