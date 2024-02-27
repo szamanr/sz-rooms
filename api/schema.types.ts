@@ -57,6 +57,7 @@ export type Database = {
           id: number
           location: string
           name: string
+          owner_id: string | null
           type: Database["public"]["Enums"]["room_type"] | null
         }
         Insert: {
@@ -68,6 +69,7 @@ export type Database = {
           id?: number
           location?: string
           name: string
+          owner_id?: string | null
           type?: Database["public"]["Enums"]["room_type"] | null
         }
         Update: {
@@ -79,9 +81,18 @@ export type Database = {
           id?: number
           location?: string
           name?: string
+          owner_id?: string | null
           type?: Database["public"]["Enums"]["room_type"] | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "public_room_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
       }
     }
     Views: {
