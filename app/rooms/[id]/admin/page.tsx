@@ -7,6 +7,7 @@ import { getRoomTypeLabel } from "@/app/rooms/getRoomTypeLabel";
 import { For } from "@/components/controlFlow/For/For";
 import { updateRoom } from "@/app/rooms/[id]/admin/actions";
 import { Button } from "@/components/Button";
+import { Input } from "@/components/form/Input";
 
 const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
   const currentUser = (await supabaseServerClient().auth.getSession()).data
@@ -48,66 +49,85 @@ const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
   if (!isOwner) return null;
 
   return (
-    <form action={updateRoom}>
-      <div className="flex flex-col gap-1">
-        <input name="id" hidden value={id} />
-        <input name="name" defaultValue={name} type="text" />
-        <input
+    <form action={updateRoom} className="flex flex-col gap-2">
+      <input name="id" hidden value={id} />
+      <div className="flex flex-col">
+        <label htmlFor="name">{$t("Name")}</label>
+        <Input id="name" name="name" defaultValue={name} type="text" />
+      </div>
+      <div className="flex flex-col">
+        <label htmlFor="cover_photo">{$t("Link to cover photo")}</label>
+        <Input
+          id="cover_photo"
           name="cover_photo"
           defaultValue={cover_photo ?? ""}
           type="text"
         />
-        <input name="location" defaultValue={location ?? ""} type="text" />
-
-        <input
-          id="flat"
-          name="type"
-          value="flat"
-          type="radio"
-          defaultChecked={type === "flat"}
+      </div>
+      <div className="flex flex-col">
+        <label htmlFor="location">{$t("Location")}</label>
+        <Input
+          id="location"
+          name="location"
+          defaultValue={location ?? ""}
+          type="text"
         />
-        <label htmlFor="flat">{getRoomTypeLabel("flat")}</label>
-        <input
-          id="room"
-          name="type"
-          value="room"
-          type="radio"
-          defaultChecked={type === "room"}
-        />
-        <label htmlFor="room">{getRoomTypeLabel("room")}</label>
+      </div>
 
-        {/* TODO: add/edit available dates */}
-        <div>
-          <h4>{$t("Available dates:")}</h4>
-          <ul>
-            <For
-              each={availability}
-              fallback={
-                <span className="text-gray-500">
-                  {$t("No available dates")}
-                </span>
-              }
-            >
-              {({ start_date, end_date, price, min_stay }) => (
-                <li className="flex gap-1 w-page-small grid grid-cols-4">
-                  <span className="col-span-2">
-                    {start_date} - {end_date}
-                  </span>
-                  <span>
-                    {price ?? default_price} {currency}
-                  </span>
-                  <Show when={min_stay || default_min_stay || null}>
-                    {(minDays) => (
-                      <span>
-                        {$t("{number} days minimum", { number: minDays })}
-                      </span>
-                    )}
-                  </Show>
-                </li>
-              )}
-            </For>
-          </ul>
+      <div>
+        <span>{$t("Room type")}</span>
+        <div className="flex items-center gap-2">
+          <input
+            id="flat"
+            name="type"
+            value="flat"
+            type="radio"
+            defaultChecked={type === "flat"}
+          />
+          <label htmlFor="flat">{getRoomTypeLabel("flat")}</label>
         </div>
+
+        <div className="flex items-center gap-2">
+          <input
+            id="room"
+            name="type"
+            value="room"
+            type="radio"
+            defaultChecked={type === "room"}
+          />
+          <label htmlFor="room">{getRoomTypeLabel("room")}</label>
+        </div>
+      </div>
+
+      {/* TODO: add/edit available dates */}
+      <div>
+        <h4>{$t("Available dates:")}</h4>
+        <ul>
+          <For
+            each={availability}
+            fallback={
+              <span className="text-gray-500">{$t("No available dates")}</span>
+            }
+          >
+            {({ start_date, end_date, price, min_stay }) => (
+              <li className="flex gap-1 w-page-small grid grid-cols-4">
+                <span className="col-span-2">
+                  {start_date} - {end_date}
+                </span>
+                <span>
+                  {price ?? default_price} {currency}
+                </span>
+                <Show when={min_stay || default_min_stay || null}>
+                  {(minDays) => (
+                    <span>
+                      {$t("{number} days minimum", { number: minDays })}
+                    </span>
+                  )}
+                </Show>
+              </li>
+            )}
+          </For>
+        </ul>
       </div>
       <Button type="submit">{$t("Save")}</Button>
     </form>
