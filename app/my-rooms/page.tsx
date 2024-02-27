@@ -4,10 +4,17 @@ import { Searchbox } from "@/app/rooms/Searchbox";
 import { SearchParams } from "@/utils/componentTypes";
 import { $t } from "@/utils/intl";
 import { RoomFilters } from "@/app/rooms/RoomFilters";
+import invariant from "tiny-invariant";
 import { RoomList } from "@/components/room/RoomList";
 
-const Rooms = async ({ searchParams }: SearchParams) => {
-  let roomsQuery = supabaseServerClient().from("room").select();
+const MyRooms = async ({ searchParams }: SearchParams) => {
+  const currentUser = (await supabaseServerClient().auth.getSession()).data
+    .session?.user;
+  invariant(currentUser);
+  let roomsQuery = supabaseServerClient()
+    .from("room")
+    .select()
+    .eq("owner_id", currentUser.id);
 
   const search = searchParams.name;
   const type = searchParams.type;
@@ -22,7 +29,9 @@ const Rooms = async ({ searchParams }: SearchParams) => {
     return <ErrorMessage />;
   }
 
-  const fallback = <div className="text-gray-500">{$t("no rooms found")}</div>;
+  const fallback = (
+    <div className="text-gray-500">{$t("You have not added any rooms")}</div>
+  );
 
   return (
     <div className="w-5/6 flex flex-col items-center gap-4">
@@ -33,7 +42,7 @@ const Rooms = async ({ searchParams }: SearchParams) => {
         <RoomFilters className="w-full" />
       </div>
       <RoomList
-        roomHref={(id) => `/rooms/${id}`}
+        roomHref={(id) => `/rooms/${id}/admin`}
         rooms={rooms}
         fallback={fallback}
       />
@@ -41,4 +50,4 @@ const Rooms = async ({ searchParams }: SearchParams) => {
   );
 };
 
-export default Rooms;
+export default MyRooms;
