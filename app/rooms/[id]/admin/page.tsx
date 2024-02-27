@@ -1,15 +1,15 @@
 import { IdRouteParams } from "@/utils/componentTypes";
 import { supabaseServerClient } from "@/api/supabaseServer";
 import { Show } from "@/components/controlFlow/Show/Show";
-import Image from "next/image";
-import Icon from "@/components/Icon";
 import { ErrorMessage } from "@/components/return/ErrorMessage";
 import { $t } from "@/utils/intl";
 import { getRoomTypeLabel } from "@/app/rooms/getRoomTypeLabel";
 import { For } from "@/components/controlFlow/For/For";
-import { ButtonLink } from "@/components/ButtonLink";
+import { updateRoom } from "@/app/rooms/[id]/admin/actions";
+import { Button } from "@/components/Button";
+import { Input } from "@/components/form/Input";
 
-const Room = async ({ params: { id } }: IdRouteParams) => {
+const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
   const currentUser = (await supabaseServerClient().auth.getSession()).data
     .session?.user;
 
@@ -44,41 +44,62 @@ const Room = async ({ params: { id } }: IdRouteParams) => {
     type,
   } = room;
 
+  // TODO: replace with route authorization
   const isOwner = owner_id && currentUser && owner_id === currentUser.id;
-
-  const [lat, long] = location?.split(",") ?? [];
-  const mapLink = `https://www.openstreetmap.org/#map=18/${lat}/${long}`;
+  if (!isOwner) return null;
 
   return (
-    <div className="flex flex-col gap-1">
-      <h3>{name}</h3>
-      <Show when={cover_photo}>
-        {(photo) => (
-          <Image src={photo} alt={"cover photo"} height={200} width={200} />
-        )}
-      </Show>
-      <Show when={location}>
-        <div className="flex gap-1">
-          {$t("location")}:
-          <a className="flex items-center gap-1" href={mapLink} target="_blank">
-            <Icon name="open_in_new" />
-            <span>{$t("see on openstreetmap")}</span>
-          </a>
+    <form action={updateRoom} className="flex flex-col gap-2">
+      <input name="id" hidden value={id} />
+      <div className="flex flex-col">
+        <label htmlFor="name">{$t("Name")}</label>
+        <Input id="name" name="name" defaultValue={name} type="text" />
+      </div>
+      <div className="flex flex-col">
+        <label htmlFor="cover_photo">{$t("Link to cover photo")}</label>
+        <Input
+          id="cover_photo"
+          name="cover_photo"
+          defaultValue={cover_photo ?? ""}
+          type="text"
+        />
+      </div>
+      <div className="flex flex-col">
+        <label htmlFor="location">{$t("Location")}</label>
+        <Input
+          id="location"
+          name="location"
+          defaultValue={location ?? ""}
+          type="text"
+        />
+      </div>
+
+      <div>
+        <span>{$t("Room type")}</span>
+        <div className="flex items-center gap-2">
+          <input
+            id="flat"
+            name="type"
+            value="flat"
+            type="radio"
+            defaultChecked={type === "flat"}
+          />
+          <label htmlFor="flat">{getRoomTypeLabel("flat")}</label>
         </div>
-      </Show>
-      <Show when={type}>
-        {(roomType) => (
-          <div className="flex gap-1">
-            {$t("type")}:<span>{getRoomTypeLabel(roomType)}</span>
-          </div>
-        )}
-      </Show>
-      <Show when={isOwner}>
-        <ButtonLink href={`/rooms/${id}/admin`}>
-          <Icon name="settings" />
-          <span>{$t("Admin panel")}</span>
-        </ButtonLink>
-      </Show>
+
+        <div className="flex items-center gap-2">
+          <input
+            id="room"
+            name="type"
+            value="room"
+            type="radio"
+            defaultChecked={type === "room"}
+          />
+          <label htmlFor="room">{getRoomTypeLabel("room")}</label>
+        </div>
+      </div>
+
+      {/* TODO: add/edit available dates */}
       <div>
         <h4>{$t("Available dates:")}</h4>
         <ul>
@@ -108,8 +129,9 @@ const Room = async ({ params: { id } }: IdRouteParams) => {
           </For>
         </ul>
       </div>
-    </div>
+      <Button type="submit">{$t("Save")}</Button>
+    </form>
   );
 };
 
-export default Room;
+export default RoomAdmin;
