@@ -7,7 +7,10 @@ import { RoomFilters } from "@/app/rooms/RoomFilters";
 import { RoomList } from "@/components/room/RoomList";
 
 const Rooms = async ({ searchParams }: SearchParams) => {
-  let roomsQuery = supabaseServerClient().from("room").select();
+  let roomsQuery = supabaseServerClient()
+    .from("room")
+    .select()
+    .order("created_at", { ascending: false });
 
   const search = searchParams.name;
   const type = searchParams.type;

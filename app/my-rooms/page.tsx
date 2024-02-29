@@ -18,7 +18,8 @@ const MyRooms = async ({ searchParams }: SearchParams) => {
   let roomsQuery = supabaseServerClient()
     .from("room")
     .select()
-    .eq("owner_id", currentUser.id);
+    .eq("owner_id", currentUser.id)
+    .order("created_at", { ascending: false });
 
   const search = searchParams.name;
   const type = searchParams.type;
