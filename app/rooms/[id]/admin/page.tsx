@@ -5,7 +5,7 @@ import { ErrorMessage } from "@/components/return/ErrorMessage";
 import { $t } from "@/utils/intl";
 import { getRoomTypeLabel } from "@/app/rooms/getRoomTypeLabel";
 import { For } from "@/components/controlFlow/For/For";
-import { updateRoom } from "@/app/rooms/[id]/admin/actions";
+import { deleteRoom, updateRoom } from "@/app/rooms/[id]/admin/actions";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/form/Input";
 import { redirect } from "next/navigation";
@@ -171,7 +171,12 @@ const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
           </For>
         </ul>
       </div>
-      <Button type="submit">{$t("Save")}</Button>
+      <div className="flex gap-2">
+        <Button type="submit">{$t("Save")}</Button>
+        <Button formAction={deleteRoom} variant="danger">
+          {$t("Delete")}
+        </Button>
+      </div>
     </form>
   );
 };
