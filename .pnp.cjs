@@ -27,6 +27,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@headlessui/react", "virtual:eb77c34dba45f33c2be1a084126f68c8d703de17fa1adf56972c76be8e90cbfdd186f7954a6eb4ee657bbeb813d4a56f89817354b5d74991bad530b644cc8214#npm:1.7.18"],\
+          ["@shoooe/derive", "npm:0.3.0"],\
           ["@supabase/auth-helpers-nextjs", "virtual:eb77c34dba45f33c2be1a084126f68c8d703de17fa1adf56972c76be8e90cbfdd186f7954a6eb4ee657bbeb813d4a56f89817354b5d74991bad530b644cc8214#npm:0.9.0"],\
           ["@supabase/ssr", "virtual:eb77c34dba45f33c2be1a084126f68c8d703de17fa1adf56972c76be8e90cbfdd186f7954a6eb4ee657bbeb813d4a56f89817354b5d74991bad530b644cc8214#npm:0.1.0"],\
           ["@supabase/supabase-js", "npm:2.39.3"],\
@@ -443,6 +444,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/@rushstack-eslint-patch-npm-1.7.2-e0ac536367-10c0.zip/node_modules/@rushstack/eslint-patch/",\
         "packageDependencies": [\
           ["@rushstack/eslint-patch", "npm:1.7.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@shoooe/derive", [\
+      ["npm:0.3.0", {\
+        "packageLocation": "../../../.yarn/berry/cache/@shoooe-derive-npm-0.3.0-dae51949cc-10c0.zip/node_modules/@shoooe/derive/",\
+        "packageDependencies": [\
+          ["@shoooe/derive", "npm:0.3.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3576,6 +3586,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["nextjs-001", "workspace:."],\
           ["@headlessui/react", "virtual:eb77c34dba45f33c2be1a084126f68c8d703de17fa1adf56972c76be8e90cbfdd186f7954a6eb4ee657bbeb813d4a56f89817354b5d74991bad530b644cc8214#npm:1.7.18"],\
+          ["@shoooe/derive", "npm:0.3.0"],\
           ["@supabase/auth-helpers-nextjs", "virtual:eb77c34dba45f33c2be1a084126f68c8d703de17fa1adf56972c76be8e90cbfdd186f7954a6eb4ee657bbeb813d4a56f89817354b5d74991bad530b644cc8214#npm:0.9.0"],\
           ["@supabase/ssr", "virtual:eb77c34dba45f33c2be1a084126f68c8d703de17fa1adf56972c76be8e90cbfdd186f7954a6eb4ee657bbeb813d4a56f89817354b5d74991bad530b644cc8214#npm:0.1.0"],\
           ["@supabase/supabase-js", "npm:2.39.3"],\
