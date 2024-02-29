@@ -12,7 +12,7 @@ const RoomAdd = async () => {
   if (!currentUser) redirect("/my-rooms");
 
   return (
-    <form action={insertRoom} className="flex flex-col gap-2">
+    <form action={insertRoom} className="flex flex-col gap-2 min-w-[30vw]">
       <input name="ownerId" hidden readOnly value={currentUser.id} />
 
       <Input id="name" name="name" type="text" label={$t("Name")} />

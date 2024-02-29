@@ -9,6 +9,7 @@ import { deleteRoom, updateRoom } from "@/app/rooms/[id]/admin/actions";
 import { Button } from "@/components/buttons/Button";
 import { Input } from "@/components/form/Input";
 import { redirect } from "next/navigation";
+import { ConfirmButton } from "@/components/buttons/ConfirmButton";
 
 const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
   const currentUser = (await supabaseServerClient().auth.getSession()).data
@@ -51,7 +52,7 @@ const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
   if (!isOwner) redirect(`/rooms/${id}`);
 
   return (
-    <form action={updateRoom} className="flex flex-col gap-2">
+    <form action={updateRoom} className="flex flex-col gap-2 min-w-[30vw]">
       <input name="id" hidden readOnly value={id} />
       <Input
         defaultValue={name}
@@ -173,9 +174,9 @@ const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
       </div>
       <div className="flex gap-2">
         <Button type="submit">{$t("Save")}</Button>
-        <Button formAction={deleteRoom} variant="danger">
+        <ConfirmButton formAction={deleteRoom} variant="danger">
           {$t("Delete")}
-        </Button>
+        </ConfirmButton>
       </div>
     </form>
   );
