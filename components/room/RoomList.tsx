@@ -6,21 +6,26 @@ import Image from "next/image";
 type Room = Database["public"]["Tables"]["room"]["Row"];
 
 type Props = {
-  fallback: JSX.Element;
+  children?: React.ReactNode;
+  fallback?: JSX.Element;
   roomHref: (id: number) => string;
   rooms: Room[];
 };
 
-export const RoomList = ({ fallback, roomHref, rooms }: Props) => (
-  <ul className="grid grid-cols-3 gap-6">
+export const RoomList = ({ children, fallback, roomHref, rooms }: Props) => (
+  <ul className="grid grid-cols-3 auto-rows-fr gap-6 w-full">
     <For each={rooms} fallback={fallback}>
       {({ id, name, cover_photo }) => (
-        <li className="w-32">
-          <Link className="flex flex-col" href={roomHref(id)}>
+        <li className="size-full">
+          <Link
+            className="flex flex-col justify-center items-center"
+            href={roomHref(id)}
+          >
             <Image
-              src={cover_photo ?? "https://placeholder.photo/img/200"}
               alt={"cover photo"}
+              className="rounded"
               height={200}
+              src={cover_photo ?? "https://placeholder.photo/img/200"}
               width={200}
             />
             <span>{name}</span>
@@ -28,5 +33,6 @@ export const RoomList = ({ fallback, roomHref, rooms }: Props) => (
         </li>
       )}
     </For>
+    {children}
   </ul>
 );
