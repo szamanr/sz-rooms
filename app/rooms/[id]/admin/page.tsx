@@ -53,49 +53,48 @@ const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
   return (
     <form action={updateRoom} className="flex flex-col gap-2">
       <input name="id" hidden readOnly value={id} />
-      <div className="flex flex-col">
-        <label htmlFor="name">{$t("Name")}</label>
-        <Input id="name" name="name" defaultValue={name} type="text" />
-      </div>
-      <div className="flex flex-col">
-        <label htmlFor="cover_photo">{$t("Link to cover photo")}</label>
-        <Input
-          id="cover_photo"
-          name="cover_photo"
-          defaultValue={cover_photo ?? ""}
-          type="text"
-        />
-      </div>
-      <div className="flex flex-col">
-        <label htmlFor="location">{$t("Location")}</label>
-        <Input
-          id="location"
-          name="location"
-          defaultValue={location ?? ""}
-          type="text"
-        />
-      </div>
+      <Input
+        defaultValue={name}
+        id="name"
+        label={$t("Name")}
+        name="name"
+        type="text"
+      />
+      <Input
+        defaultValue={cover_photo ?? ""}
+        id="cover_photo"
+        label={$t("Link to cover photo")}
+        name="cover_photo"
+        type="text"
+      />
+      <Input
+        defaultValue={location ?? ""}
+        id="location"
+        label={$t("Location")}
+        name="location"
+        type="text"
+      />
 
       <div>
         <span>{$t("Room type")}</span>
         <div className="flex items-center gap-2">
           <input
+            defaultChecked={type === "flat"}
             id="flat"
             name="type"
-            value="flat"
             type="radio"
-            defaultChecked={type === "flat"}
+            value="flat"
           />
           <label htmlFor="flat">{getRoomTypeLabel("flat")}</label>
         </div>
 
         <div className="flex items-center gap-2">
           <input
+            defaultChecked={type === "room"}
             id="room"
             name="type"
-            value="room"
             type="radio"
-            defaultChecked={type === "room"}
+            value="room"
           />
           <label htmlFor="room">{getRoomTypeLabel("room")}</label>
         </div>
@@ -126,27 +125,21 @@ const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
         </div>
       </div>
 
-      <div className="flex flex-col">
-        <label htmlFor="defaultPrice">{$t("Default price")}</label>
-        <Input
-          defaultValue={default_price ?? ""}
-          id="defaultPrice"
-          name="defaultPrice"
-          type="number"
-        />
-      </div>
+      <Input
+        defaultValue={default_price ?? ""}
+        id="defaultPrice"
+        label={$t("Default price")}
+        name="defaultPrice"
+        type="number"
+      />
 
-      <div className="flex flex-col">
-        <label htmlFor="defaultMinStay">
-          {$t("Default minimum stay (days)")}
-        </label>
-        <Input
-          defaultValue={default_min_stay}
-          id="defaultMinStay"
-          name="defaultMinStay"
-          type="number"
-        />
-      </div>
+      <Input
+        defaultValue={default_min_stay}
+        id="defaultMinStay"
+        label={$t("Default minimum stay (days)")}
+        name="defaultMinStay"
+        type="number"
+      />
 
       {/* TODO: add/edit available dates */}
       <div>

@@ -1,15 +1,33 @@
 import React from "react";
 import { twClass } from "@/utils/twClass";
+import { Show } from "@/components/controlFlow/Show/Show";
 
-type Props = React.InputHTMLAttributes<HTMLInputElement>;
+type Props = React.InputHTMLAttributes<HTMLInputElement> & {
+  label?: React.ReactNode;
+};
 
-export const Input: React.FC<Props> = ({ children, className, ...rest }) => {
+export const Input: React.FC<Props> = ({
+  children,
+  className,
+  id,
+  label,
+  ...rest
+}) => {
   return (
-    <input
-      className={twClass("px-2 py-1 rounded border border-gray-200", className)}
-      {...rest}
-    >
-      {children}
-    </input>
+    <div className="flex flex-col">
+      <Show when={label}>
+        <label htmlFor={id}>{label}</label>
+      </Show>
+      <input
+        className={twClass(
+          "px-2 py-1 rounded border border-gray-200",
+          className,
+        )}
+        id={id}
+        {...rest}
+      >
+        {children}
+      </input>
+    </div>
   );
 };
