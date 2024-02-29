@@ -8,10 +8,12 @@ import { For } from "@/components/controlFlow/For/For";
 import { updateRoom } from "@/app/rooms/[id]/admin/actions";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/form/Input";
+import { redirect } from "next/navigation";
 
 const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
   const currentUser = (await supabaseServerClient().auth.getSession()).data
     .session?.user;
+  if (!currentUser) redirect(`/rooms/${id}`);
 
   const { data, error } = await supabaseServerClient()
     .from("room")
@@ -46,11 +48,11 @@ const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
 
   // TODO: replace with route authorization
   const isOwner = owner_id && currentUser && owner_id === currentUser.id;
-  if (!isOwner) return null;
+  if (!isOwner) redirect(`/rooms/${id}`);
 
   return (
     <form action={updateRoom} className="flex flex-col gap-2">
-      <input name="id" hidden value={id} />
+      <input name="id" hidden readOnly value={id} />
       <div className="flex flex-col">
         <label htmlFor="name">{$t("Name")}</label>
         <Input id="name" name="name" defaultValue={name} type="text" />
@@ -97,6 +99,53 @@ const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
           />
           <label htmlFor="room">{getRoomTypeLabel("room")}</label>
         </div>
+      </div>
+
+      <div>
+        <span>{$t("Currency")}</span>
+        <div className="flex items-center gap-2">
+          <input
+            defaultChecked={currency === "EUR"}
+            id="EUR"
+            name="currency"
+            type="radio"
+            value="EUR"
+          />
+          <label htmlFor="EUR">{$t("€ Euro")}</label>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <input
+            defaultChecked={currency === "USD"}
+            id="USD"
+            name="currency"
+            type="radio"
+            value="USD"
+          />
+          <label htmlFor="USD">{$t("$ US Dollar")}</label>
+        </div>
+      </div>
+
+      <div className="flex flex-col">
+        <label htmlFor="defaultPrice">{$t("Default price")}</label>
+        <Input
+          defaultValue={default_price ?? ""}
+          id="defaultPrice"
+          name="defaultPrice"
+          type="number"
+        />
+      </div>
+
+      <div className="flex flex-col">
+        <label htmlFor="defaultMinStay">
+          {$t("Default minimum stay (days)")}
+        </label>
+        <Input
+          defaultValue={default_min_stay}
+          id="defaultMinStay"
+          name="defaultMinStay"
+          type="number"
+        />
       </div>
 
       {/* TODO: add/edit available dates */}
