@@ -7,7 +7,7 @@ import { ErrorMessage } from "@/components/return/ErrorMessage";
 import { $t } from "@/utils/intl";
 import { getRoomTypeLabel } from "@/app/rooms/getRoomTypeLabel";
 import { For } from "@/components/controlFlow/For/For";
-import { ButtonLink } from "@/components/ButtonLink";
+import { ButtonLink } from "@/components/buttons/ButtonLink";
 
 const Room = async ({ params: { id } }: IdRouteParams) => {
   const currentUser = (await supabaseServerClient().auth.getSession()).data

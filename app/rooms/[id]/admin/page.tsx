@@ -5,10 +5,11 @@ import { ErrorMessage } from "@/components/return/ErrorMessage";
 import { $t } from "@/utils/intl";
 import { getRoomTypeLabel } from "@/app/rooms/getRoomTypeLabel";
 import { For } from "@/components/controlFlow/For/For";
-import { updateRoom } from "@/app/rooms/[id]/admin/actions";
-import { Button } from "@/components/Button";
+import { deleteRoom, updateRoom } from "@/app/rooms/[id]/admin/actions";
+import { Button } from "@/components/buttons/Button";
 import { Input } from "@/components/form/Input";
 import { redirect } from "next/navigation";
+import { ConfirmButton } from "@/components/buttons/ConfirmButton";
 
 const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
   const currentUser = (await supabaseServerClient().auth.getSession()).data
@@ -51,7 +52,7 @@ const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
   if (!isOwner) redirect(`/rooms/${id}`);
 
   return (
-    <form action={updateRoom} className="flex flex-col gap-2">
+    <form action={updateRoom} className="flex flex-col gap-2 min-w-[30vw]">
       <input name="id" hidden readOnly value={id} />
       <Input
         defaultValue={name}
@@ -171,7 +172,12 @@ const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
           </For>
         </ul>
       </div>
-      <Button type="submit">{$t("Save")}</Button>
+      <div className="flex gap-2">
+        <Button type="submit">{$t("Save")}</Button>
+        <ConfirmButton formAction={deleteRoom} variant="danger">
+          {$t("Delete")}
+        </ConfirmButton>
+      </div>
     </form>
   );
 };
