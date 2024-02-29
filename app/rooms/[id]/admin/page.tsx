@@ -6,7 +6,7 @@ import { $t } from "@/utils/intl";
 import { getRoomTypeLabel } from "@/app/rooms/getRoomTypeLabel";
 import { For } from "@/components/controlFlow/For/For";
 import { deleteRoom, updateRoom } from "@/app/rooms/[id]/admin/actions";
-import { Button } from "@/components/Button";
+import { Button } from "@/components/buttons/Button";
 import { Input } from "@/components/form/Input";
 import { redirect } from "next/navigation";
 
