@@ -15,14 +15,9 @@ const RoomAdd = async () => {
     <form action={insertRoom} className="flex flex-col gap-2 min-w-[30vw]">
       <input name="ownerId" hidden readOnly value={currentUser.id} />
 
-      <Input id="name" name="name" type="text" label={$t("Name")} />
-      <Input
-        id="coverPhoto"
-        label={$t("Link to cover photo")}
-        name="coverPhoto"
-        type="text"
-      />
-      <Input id="location" name="location" type="text" label={$t("Location")} />
+      <Input name="name" type="text" label={$t("Name")} />
+      <Input label={$t("Link to cover photo")} name="coverPhoto" type="text" />
+      <Input name="location" type="text" label={$t("Location")} />
 
       <div>
         <span>{$t("Room type")}</span>
@@ -62,15 +57,9 @@ const RoomAdd = async () => {
         </div>
       </div>
 
-      <Input
-        id="defaultPrice"
-        label={$t("Default price")}
-        name="defaultPrice"
-        type="number"
-      />
+      <Input label={$t("Default price")} name="defaultPrice" type="number" />
 
       <Input
-        id="defaultMinStay"
         label={$t("Default minimum stay (days)")}
         name="defaultMinStay"
         type="number"
