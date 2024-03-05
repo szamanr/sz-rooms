@@ -24,7 +24,7 @@ export const Input: React.FC<Props> = ({
           "px-2 py-1 rounded border border-gray-200",
           className,
         )}
-        id={id}
+        id={id ?? name}
         name={name}
         {...rest}
       >

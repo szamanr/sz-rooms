@@ -61,23 +61,15 @@ const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
     <div className="flex flex-col gap-4 min-w-[30vw]">
       <form action={updateRoom} className="flex flex-col gap-2">
         <input name="id" hidden readOnly value={id} />
-        <Input
-          defaultValue={name}
-          id="name"
-          label={$t("Name")}
-          name="name"
-          type="text"
-        />
+        <Input defaultValue={name} label={$t("Name")} name="name" type="text" />
         <Input
           defaultValue={cover_photo ?? ""}
-          id="cover_photo"
           label={$t("Link to cover photo")}
           name="cover_photo"
           type="text"
         />
         <Input
           defaultValue={location ?? ""}
-          id="location"
           label={$t("Location")}
           name="location"
           type="text"
@@ -135,7 +127,6 @@ const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
 
         <Input
           defaultValue={default_price ?? ""}
-          id="defaultPrice"
           label={$t("Default price")}
           name="defaultPrice"
           type="number"
@@ -143,7 +134,6 @@ const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
 
         <Input
           defaultValue={default_min_stay}
-          id="defaultMinStay"
           label={$t("Default minimum stay (days)")}
           name="defaultMinStay"
           type="number"
