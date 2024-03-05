@@ -2,14 +2,20 @@
 import React, { useState } from "react";
 import { Button } from "@/components/buttons/Button";
 import { $t } from "@/utils/intl";
+import { isUndefined } from "lodash";
 
 type Props = React.ComponentProps<typeof Button> & {
-  message?: React.ReactNode;
+  messages?: {
+    no?: React.ReactNode;
+    prompt?: React.ReactNode;
+    yes?: React.ReactNode;
+  };
 };
 
 export const ConfirmButton: React.FC<Props> = ({
+  className,
   formAction,
-  message,
+  messages,
   onClick,
   ...rest
 }) => {
@@ -17,15 +23,25 @@ export const ConfirmButton: React.FC<Props> = ({
 
   return showConfirm ? (
     <div className="flex items-center gap-2">
-      <span>{message ?? $t("Are you sure?")}</span>
-      <Button formAction={formAction} onClick={onClick}>
-        {$t("Yes")}
+      <span>
+        {isUndefined(messages?.prompt) ? $t("Are you sure?") : messages?.prompt}
+      </span>
+      <Button className={className} formAction={formAction} onClick={onClick}>
+        {messages?.yes ?? $t("Yes")}
       </Button>
-      <Button onClick={() => setShowConfirm(false)} variant="negative">
-        {$t("No")}
+      <Button
+        className={className}
+        onClick={() => setShowConfirm(false)}
+        variant="negative"
+      >
+        {messages?.no ?? $t("No")}
       </Button>
     </div>
   ) : (
-    <Button onClick={() => setShowConfirm(true)} {...rest} />
+    <Button
+      className={className}
+      onClick={() => setShowConfirm(true)}
+      {...rest}
+    />
   );
 };

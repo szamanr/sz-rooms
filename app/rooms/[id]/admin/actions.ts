@@ -147,3 +147,21 @@ export const addAvailability = async (formData: FormData) => {
   revalidatePath(`/rooms/${roomId}`, "page");
   revalidatePath(`/rooms/${roomId}/admin`, "page");
 };
+
+export const deleteAvailability = async (formData: FormData) => {
+  const id = formData.get("id") as string;
+  invariant(id);
+
+  const { error } = await supabaseServerClient()
+    .from("availability")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  revalidatePath(`/rooms/${id}`, "page");
+  revalidatePath(`/rooms/${id}/admin`, "page");
+};

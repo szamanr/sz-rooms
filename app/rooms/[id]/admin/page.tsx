@@ -7,6 +7,7 @@ import { getRoomTypeLabel } from "@/app/rooms/getRoomTypeLabel";
 import { For } from "@/components/controlFlow/For/For";
 import {
   addAvailability,
+  deleteAvailability,
   deleteRoom,
   updateRoom,
 } from "@/app/rooms/[id]/admin/actions";
@@ -14,6 +15,7 @@ import { Button } from "@/components/buttons/Button";
 import { Input } from "@/components/form/Input";
 import { redirect } from "next/navigation";
 import { ConfirmButton } from "@/components/buttons/ConfirmButton";
+import Icon from "@/components/Icon";
 
 const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
   const currentUser = (await supabaseServerClient().auth.getSession()).data
@@ -157,21 +159,38 @@ const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
               <li className="text-gray-500">{$t("No available dates")}</li>
             }
           >
-            {({ start_date, end_date, price, min_stay }) => (
-              <li className="flex gap-1 w-page-small grid grid-cols-4">
+            {({ id, start_date, end_date, price, min_stay }) => (
+              <li className="gap-1 w-page-small grid grid-cols-5">
                 <span className="col-span-2">
                   {start_date} - {end_date}
                 </span>
                 <span>
                   {price ?? default_price} {currency}
                 </span>
-                <Show when={min_stay || default_min_stay || null}>
+                <Show
+                  when={min_stay ?? default_min_stay ?? null}
+                  fallback={<span />}
+                >
                   {(minDays) => (
                     <span>
                       {$t("{number} days minimum", { number: minDays })}
                     </span>
                   )}
                 </Show>
+                <form action={deleteAvailability} className="justify-self-end">
+                  <input name="id" hidden readOnly value={id} />
+                  <ConfirmButton
+                    key={id}
+                    className="px-1 py-0"
+                    messages={{
+                      prompt: $t("Delete?"),
+                    }}
+                    type="submit"
+                    variant="danger"
+                  >
+                    <Icon name="delete" size="xl" />
+                  </ConfirmButton>
+                </form>
               </li>
             )}
           </For>
