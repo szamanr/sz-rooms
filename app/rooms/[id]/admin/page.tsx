@@ -5,7 +5,11 @@ import { ErrorMessage } from "@/components/return/ErrorMessage";
 import { $t } from "@/utils/intl";
 import { getRoomTypeLabel } from "@/app/rooms/getRoomTypeLabel";
 import { For } from "@/components/controlFlow/For/For";
-import { deleteRoom, updateRoom } from "@/app/rooms/[id]/admin/actions";
+import {
+  addAvailability,
+  deleteRoom,
+  updateRoom,
+} from "@/app/rooms/[id]/admin/actions";
 import { Button } from "@/components/buttons/Button";
 import { Input } from "@/components/form/Input";
 import { redirect } from "next/navigation";
@@ -52,104 +56,105 @@ const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
   if (!isOwner) redirect(`/rooms/${id}`);
 
   return (
-    <form action={updateRoom} className="flex flex-col gap-2 min-w-[30vw]">
-      <input name="id" hidden readOnly value={id} />
-      <Input
-        defaultValue={name}
-        id="name"
-        label={$t("Name")}
-        name="name"
-        type="text"
-      />
-      <Input
-        defaultValue={cover_photo ?? ""}
-        id="cover_photo"
-        label={$t("Link to cover photo")}
-        name="cover_photo"
-        type="text"
-      />
-      <Input
-        defaultValue={location ?? ""}
-        id="location"
-        label={$t("Location")}
-        name="location"
-        type="text"
-      />
+    <div className="flex flex-col gap-4 min-w-[30vw]">
+      <form action={updateRoom} className="flex flex-col gap-2">
+        <input name="id" hidden readOnly value={id} />
+        <Input
+          defaultValue={name}
+          id="name"
+          label={$t("Name")}
+          name="name"
+          type="text"
+        />
+        <Input
+          defaultValue={cover_photo ?? ""}
+          id="cover_photo"
+          label={$t("Link to cover photo")}
+          name="cover_photo"
+          type="text"
+        />
+        <Input
+          defaultValue={location ?? ""}
+          id="location"
+          label={$t("Location")}
+          name="location"
+          type="text"
+        />
 
-      <div>
-        <span>{$t("Room type")}</span>
-        <div className="flex items-center gap-2">
-          <input
-            defaultChecked={type === "flat"}
-            id="flat"
-            name="type"
-            type="radio"
-            value="flat"
-          />
-          <label htmlFor="flat">{getRoomTypeLabel("flat")}</label>
+        <div>
+          <span>{$t("Room type")}</span>
+          <div className="flex items-center gap-2">
+            <input
+              defaultChecked={type === "flat"}
+              id="flat"
+              name="type"
+              type="radio"
+              value="flat"
+            />
+            <label htmlFor="flat">{getRoomTypeLabel("flat")}</label>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <input
+              defaultChecked={type === "room"}
+              id="room"
+              name="type"
+              type="radio"
+              value="room"
+            />
+            <label htmlFor="room">{getRoomTypeLabel("room")}</label>
+          </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <input
-            defaultChecked={type === "room"}
-            id="room"
-            name="type"
-            type="radio"
-            value="room"
-          />
-          <label htmlFor="room">{getRoomTypeLabel("room")}</label>
+        <div>
+          <span>{$t("Currency")}</span>
+          <div className="flex items-center gap-2">
+            <input
+              defaultChecked={currency === "EUR"}
+              id="EUR"
+              name="currency"
+              type="radio"
+              value="EUR"
+            />
+            <label htmlFor="EUR">{$t("€ Euro")}</label>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <input
+              defaultChecked={currency === "USD"}
+              id="USD"
+              name="currency"
+              type="radio"
+              value="USD"
+            />
+            <label htmlFor="USD">{$t("$ US Dollar")}</label>
+          </div>
         </div>
-      </div>
 
-      <div>
-        <span>{$t("Currency")}</span>
-        <div className="flex items-center gap-2">
-          <input
-            defaultChecked={currency === "EUR"}
-            id="EUR"
-            name="currency"
-            type="radio"
-            value="EUR"
-          />
-          <label htmlFor="EUR">{$t("€ Euro")}</label>
-        </div>
+        <Input
+          defaultValue={default_price ?? ""}
+          id="defaultPrice"
+          label={$t("Default price")}
+          name="defaultPrice"
+          type="number"
+        />
 
-        <div className="flex items-center gap-2">
-          <input
-            defaultChecked={currency === "USD"}
-            id="USD"
-            name="currency"
-            type="radio"
-            value="USD"
-          />
-          <label htmlFor="USD">{$t("$ US Dollar")}</label>
-        </div>
-      </div>
+        <Input
+          defaultValue={default_min_stay}
+          id="defaultMinStay"
+          label={$t("Default minimum stay (days)")}
+          name="defaultMinStay"
+          type="number"
+        />
+      </form>
 
-      <Input
-        defaultValue={default_price ?? ""}
-        id="defaultPrice"
-        label={$t("Default price")}
-        name="defaultPrice"
-        type="number"
-      />
-
-      <Input
-        defaultValue={default_min_stay}
-        id="defaultMinStay"
-        label={$t("Default minimum stay (days)")}
-        name="defaultMinStay"
-        type="number"
-      />
-
-      {/* TODO: add/edit available dates */}
       <div>
         <h4>{$t("Available dates:")}</h4>
-        <ul>
+        <ul className="flex flex-col gap-2">
           <For
             each={availability}
             fallback={
-              <span className="text-gray-500">{$t("No available dates")}</span>
+              <li className="text-gray-500">{$t("No available dates")}</li>
             }
           >
             {({ start_date, end_date, price, min_stay }) => (
@@ -170,15 +175,23 @@ const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
               </li>
             )}
           </For>
+          <form action={addAvailability}>
+            <li className="flex gap-2">
+              <input name="roomId" hidden readOnly value={room.id} />
+              <Input placeholder={$t("Start date")} name="startDate" />
+              <Input placeholder={$t("End date")} name="endDate" />
+              <Button type="submit">{$t("Add")}</Button>
+            </li>
+          </form>
         </ul>
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-2 mt-2">
         <Button type="submit">{$t("Save")}</Button>
         <ConfirmButton formAction={deleteRoom} variant="danger">
           {$t("Delete")}
         </ConfirmButton>
       </div>
-    </form>
+    </div>
   );
 };
 

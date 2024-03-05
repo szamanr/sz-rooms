@@ -11,12 +11,13 @@ export const Input: React.FC<Props> = ({
   className,
   id,
   label,
+  name,
   ...rest
 }) => {
   return (
     <div className="flex flex-col">
       <Show when={label}>
-        <label htmlFor={id}>{label}</label>
+        <label htmlFor={id ?? name}>{label}</label>
       </Show>
       <input
         className={twClass(
@@ -24,6 +25,7 @@ export const Input: React.FC<Props> = ({
           className,
         )}
         id={id}
+        name={name}
         {...rest}
       >
         {children}

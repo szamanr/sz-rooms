@@ -110,3 +110,40 @@ export const deleteRoom = async (formData: FormData) => {
   revalidatePath(`/my-rooms`, "page");
   redirect(`/my-rooms`);
 };
+
+type InsertAvailability = Derive<
+  Database["public"]["Tables"]["availability"]["Row"],
+  {
+    end_date: true;
+    room_id: true;
+    start_date: true;
+  }
+>;
+
+export const addAvailability = async (formData: FormData) => {
+  const roomId = formData.get("roomId") as string;
+  const startDate = formData.get("startDate") as string;
+  const endDate = formData.get("endDate") as string;
+  invariant(roomId);
+  invariant(startDate);
+  invariant(endDate);
+
+  const values = {
+    end_date: endDate,
+    room_id: parseInt(roomId),
+    start_date: startDate,
+  } satisfies InsertAvailability;
+
+  const { error } = await supabaseServerClient()
+    .from("availability")
+    .insert(values)
+    .select();
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  revalidatePath(`/rooms/${roomId}`, "page");
+  revalidatePath(`/rooms/${roomId}/admin`, "page");
+};
