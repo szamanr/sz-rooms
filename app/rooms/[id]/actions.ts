@@ -1,3 +1,4 @@
+"use server";
 import { supabaseServerClient } from "@/api/supabaseServer";
 import { revalidatePath } from "next/cache";
 import invariant from "tiny-invariant";

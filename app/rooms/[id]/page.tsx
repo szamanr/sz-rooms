@@ -8,6 +8,7 @@ import { $t } from "@/utils/intl";
 import { getRoomTypeLabel } from "@/app/rooms/getRoomTypeLabel";
 import { For } from "@/components/controlFlow/For/For";
 import { ButtonLink } from "@/components/buttons/ButtonLink";
+import { MakeBooking } from "@/app/rooms/[id]/MakeBooking";
 
 const Room = async ({ params: { id } }: IdRouteParams) => {
   const currentUser = (await supabaseServerClient().auth.getSession()).data
@@ -44,13 +45,14 @@ const Room = async ({ params: { id } }: IdRouteParams) => {
     type,
   } = room;
 
-  const isOwner = owner_id && currentUser && owner_id === currentUser.id;
+  const isLoggedIn = !!currentUser;
+  const isOwner = !!(isLoggedIn && owner_id && owner_id === currentUser.id);
 
   const [lat, long] = location?.split(",") ?? [];
   const mapLink = `https://www.openstreetmap.org/#map=18/${lat}/${long}`;
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-2">
       <h3>{name}</h3>
       <Show when={cover_photo}>
         {(photo) => (
@@ -108,6 +110,9 @@ const Room = async ({ params: { id } }: IdRouteParams) => {
           </For>
         </ul>
       </div>
+      <Show when={isLoggedIn && !isOwner}>
+        <MakeBooking roomId={room.id} />
+      </Show>
     </div>
   );
 };
