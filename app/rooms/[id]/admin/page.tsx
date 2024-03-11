@@ -65,7 +65,7 @@ const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
         <Input
           defaultValue={cover_photo ?? ""}
           label={$t("Link to cover photo")}
-          name="cover_photo"
+          name="coverPhoto"
           type="text"
         />
         <Input
@@ -138,6 +138,12 @@ const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
           name="defaultMinStay"
           type="number"
         />
+        <div className="flex gap-2 mt-2">
+          <Button type="submit">{$t("Save")}</Button>
+          <ConfirmButton formAction={deleteRoom} variant="danger">
+            {$t("Delete")}
+          </ConfirmButton>
+        </div>
       </form>
 
       <div>
@@ -193,12 +199,6 @@ const RoomAdmin = async ({ params: { id } }: IdRouteParams) => {
             </li>
           </form>
         </ul>
-      </div>
-      <div className="flex gap-2 mt-2">
-        <Button type="submit">{$t("Save")}</Button>
-        <ConfirmButton formAction={deleteRoom} variant="danger">
-          {$t("Delete")}
-        </ConfirmButton>
       </div>
     </div>
   );
