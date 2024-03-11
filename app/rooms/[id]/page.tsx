@@ -8,7 +8,7 @@ import { $t } from "@/utils/intl";
 import { getRoomTypeLabel } from "@/app/rooms/getRoomTypeLabel";
 import { For } from "@/components/controlFlow/For/For";
 import { ButtonLink } from "@/components/buttons/ButtonLink";
-import { MakeBooking } from "@/app/rooms/[id]/MakeBooking";
+import { MyRequests } from "@/app/rooms/[id]/MyRequests";
 
 const Room = async ({ params: { id } }: IdRouteParams) => {
   const currentUser = (await supabaseServerClient().auth.getSession()).data
@@ -110,8 +110,9 @@ const Room = async ({ params: { id } }: IdRouteParams) => {
           </For>
         </ul>
       </div>
+
       <Show when={isLoggedIn && !isOwner}>
-        <MakeBooking roomId={room.id} />
+        <MyRequests roomId={room.id} />
       </Show>
     </div>
   );
