@@ -40,3 +40,22 @@ export const sendBookingRequest = async (formData: FormData) => {
 
   revalidatePath(`/rooms/${roomId}`, "page");
 };
+
+export const deleteBookingRequest = async (formData: FormData) => {
+  const id = formData.get("id") as string;
+  const roomId = formData.get("roomId") as string;
+  invariant(id);
+  invariant(roomId);
+
+  const { error } = await supabaseServerClient()
+    .from("booking_request")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  revalidatePath(`/rooms/${roomId}`, "page");
+};
