@@ -62,13 +62,13 @@ export const insertRoom = async (formData: FormData) => {
 };
 
 export const updateRoom = async (formData: FormData) => {
-  const defaultMinStay = formData.get("default_min_price") as Maybe<string>;
-  const defaultPrice = formData.get("default_price") as Maybe<string>;
+  const defaultMinStay = formData.get("defaultMinStay") as Maybe<string>;
+  const defaultPrice = formData.get("defaultPrice") as Maybe<string>;
   const id = formData.get("id") as string;
   invariant(id);
 
   const values = {
-    cover_photo: (formData.get("cover_photo") as Maybe<string>) ?? undefined,
+    cover_photo: (formData.get("coverPhoto") as Maybe<string>) ?? undefined,
     currency: formData.get("currency") as Maybe<Enums<"currency">>,
     default_min_stay: defaultMinStay ? parseInt(defaultMinStay) : undefined,
     default_price: defaultPrice ? parseFloat(defaultPrice) : undefined,
