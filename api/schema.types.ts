@@ -47,6 +47,48 @@ export type Database = {
           }
         ]
       }
+      booking_request: {
+        Row: {
+          created_at: string
+          end_date: string
+          id: number
+          room_id: number
+          start_date: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          end_date: string
+          id?: number
+          room_id: number
+          start_date: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          end_date?: string
+          id?: number
+          room_id?: number
+          start_date?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_booking_request_room_id_fkey"
+            columns: ["room_id"]
+            isOneToOne: false
+            referencedRelation: "room"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_booking_request_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       room: {
         Row: {
           cover_photo: string | null
