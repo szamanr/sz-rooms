@@ -1129,6 +1129,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"date-fns@npm:^3.4.0":
+  version: 3.4.0
+  resolution: "date-fns@npm:3.4.0"
+  checksum: 10c0/e4395adcdf10b1784c6479b9d715ed9a1cb06c9d99b95607ad6db43b18371e22314d3e9e5509a378da1c5a6b34b313049bf82897b7f263f413e051f59e0ea5c2
+  languageName: node
+  linkType: hard
+
 "debug@npm:4, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4":
   version: 4.3.4
   resolution: "debug@npm:4.3.4"
@@ -2913,6 +2920,7 @@ __metadata:
     "@types/react-dom": "npm:^18"
     autoprefixer: "npm:^10.0.1"
     clsx: "npm:^2.1.0"
+    date-fns: "npm:^3.4.0"
     eslint: "npm:^8"
     eslint-config-next: "npm:14.1.0"
     lodash: "npm:^4.17.21"

@@ -17,6 +17,9 @@ export default async function Home() {
         <Link href="/my-rooms">
           <p>{$t("Manage my rooms")}</p>
         </Link>
+        <Link href="/requests">
+          <p>{$t("Booking requests")}</p>
+        </Link>
       </Show>
     </div>
   );

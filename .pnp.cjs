@@ -37,6 +37,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.2.18"],\
           ["autoprefixer", "virtual:eb77c34dba45f33c2be1a084126f68c8d703de17fa1adf56972c76be8e90cbfdd186f7954a6eb4ee657bbeb813d4a56f89817354b5d74991bad530b644cc8214#npm:10.4.17"],\
           ["clsx", "npm:2.1.0"],\
+          ["date-fns", "npm:3.4.0"],\
           ["eslint", "npm:8.56.0"],\
           ["eslint-config-next", "virtual:eb77c34dba45f33c2be1a084126f68c8d703de17fa1adf56972c76be8e90cbfdd186f7954a6eb4ee657bbeb813d4a56f89817354b5d74991bad530b644cc8214#npm:14.1.0"],\
           ["lodash", "npm:4.17.21"],\
@@ -1465,6 +1466,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../.yarn/berry/cache/damerau-levenshtein-npm-1.0.8-bda7311c69-10c0.zip/node_modules/damerau-levenshtein/",\
         "packageDependencies": [\
           ["damerau-levenshtein", "npm:1.0.8"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["date-fns", [\
+      ["npm:3.4.0", {\
+        "packageLocation": "../../../.yarn/berry/cache/date-fns-npm-3.4.0-77ddef82e4-10c0.zip/node_modules/date-fns/",\
+        "packageDependencies": [\
+          ["date-fns", "npm:3.4.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3596,6 +3606,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.2.18"],\
           ["autoprefixer", "virtual:eb77c34dba45f33c2be1a084126f68c8d703de17fa1adf56972c76be8e90cbfdd186f7954a6eb4ee657bbeb813d4a56f89817354b5d74991bad530b644cc8214#npm:10.4.17"],\
           ["clsx", "npm:2.1.0"],\
+          ["date-fns", "npm:3.4.0"],\
           ["eslint", "npm:8.56.0"],\
           ["eslint-config-next", "virtual:eb77c34dba45f33c2be1a084126f68c8d703de17fa1adf56972c76be8e90cbfdd186f7954a6eb4ee657bbeb813d4a56f89817354b5d74991bad530b644cc8214#npm:14.1.0"],\
           ["lodash", "npm:4.17.21"],\

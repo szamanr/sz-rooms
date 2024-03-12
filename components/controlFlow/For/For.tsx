@@ -13,8 +13,8 @@ type Props<T, U> = {
  * Inspired by SolidJS:
  * @see https://www.solidjs.com/docs/latest/api#for
  * @example
- * <For each={kpis} fallback={<div>Loading...</div>}>
- *   {(kpi) => <div>{kpi.name}</div>}
+ * <For each={items} fallback={<div>Loading...</div>}>
+ *   {(item) => <div>{item.name}</div>}
  * </For>
  */
 export const For = <T extends Item, U extends ReactNode>({
