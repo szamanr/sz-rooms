@@ -10,13 +10,13 @@ type Props<T, U> = {
  * Non-keyed list iteration (rendered nodes are keyed to an array index). This is useful when there is no conceptual key,
  * like if the data consists of primitives, and it is the index that is fixed rather than the value.
  *
- * ❗ note: if you want to iterate a list of object with a conceptual key (like an id), use {@link common/controlFlow/For} instead.
+ * ❗ note: if you want to iterate a list of object with a conceptual key (like an id), use {@link For} instead.
  *
  * Inspired by SolidJS:
  * @see https://www.solidjs.com/docs/latest/api#index
  *
  * @example
- * <Index each={["healthy", "unhealthy]} fallback={<div>Loading...</div>}>
+ * <Index each={["completed", "pending"]} fallback={<div>Loading...</div>}>
  *   {(status) => <div>{status}</div>}
  * </Index>
  */
