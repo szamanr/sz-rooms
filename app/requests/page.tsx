@@ -2,7 +2,7 @@ import React from "react";
 import { For } from "@/components/controlFlow/For/For";
 import { $t } from "@/utils/intl";
 import { supabaseServerClient } from "@/api/supabaseServer";
-import { differenceInDays } from "date-fns";
+import { differenceInDays, format } from "date-fns";
 import Link from "next/link";
 
 type Props = {};
@@ -53,8 +53,8 @@ const Requests: React.FC<Props> = async ({}) => {
                     count: differenceInDays(end_date, start_date),
                   })}
                 </span>
-                <span>{start_date}</span>
-                <span>{end_date}</span>
+                <span>{format(start_date, "dd MMM yyyy")}</span>
+                <span>{format(end_date, "dd MMM yyyy")}</span>
                 <span>{user_id}</span>
               </Link>
             </li>
