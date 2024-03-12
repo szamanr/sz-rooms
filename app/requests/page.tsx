@@ -3,6 +3,7 @@ import { For } from "@/components/controlFlow/For/For";
 import { $t } from "@/utils/intl";
 import { supabaseServerClient } from "@/api/supabaseServer";
 import { differenceInDays } from "date-fns";
+import Link from "next/link";
 
 type Props = {};
 
@@ -40,17 +41,22 @@ const Requests: React.FC<Props> = async ({}) => {
           each={requests}
           fallback={<span>{$t("No booking requests")}</span>}
         >
-          {({ end_date, room, start_date, user_id }) => (
-            <li className="p-2 grid grid-cols-5 gap-2 even:bg-slate-300 rounded">
-              <span>{room?.name}</span>
-              <span>
-                {$t("{count} days", {
-                  count: differenceInDays(end_date, start_date),
-                })}
-              </span>
-              <span>{start_date}</span>
-              <span>{end_date}</span>
-              <span>{user_id}</span>
+          {({ end_date, id, room, start_date, user_id }) => (
+            <li className="even:bg-slate-300 rounded">
+              <Link
+                className="p-2 grid grid-cols-5 gap-2"
+                href={`/requests/${id}`}
+              >
+                <span>{room?.name}</span>
+                <span>
+                  {$t("{count} days", {
+                    count: differenceInDays(end_date, start_date),
+                  })}
+                </span>
+                <span>{start_date}</span>
+                <span>{end_date}</span>
+                <span>{user_id}</span>
+              </Link>
             </li>
           )}
         </For>
