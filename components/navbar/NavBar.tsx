@@ -7,7 +7,7 @@ export function NavBar({ children }: ParentComponentProps) {
   return (
     <nav className="h-10 px-2 py-1 sticky top-0 left-0 flex justify-between w-full bg-gray-300 shadow">
       <div className="flex items-center">
-        <Link href="/">
+        <Link className="hover:text-lime-500 flex" href="/">
           <Icon name="home" size="2xl" />
         </Link>
         {children}

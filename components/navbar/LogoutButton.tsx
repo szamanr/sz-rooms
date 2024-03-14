@@ -2,6 +2,7 @@
 import { $t } from "@/utils/intl";
 import { supabaseClient } from "@/api/supabaseClient";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/buttons/Button";
 
 export const LogoutButton: React.FC = () => {
   const router = useRouter();
@@ -17,8 +18,8 @@ export const LogoutButton: React.FC = () => {
   };
 
   return (
-    <button className="" onClick={logOut}>
+    <Button className="font-normal" onClick={logOut} variant="negative">
       {$t("Log out")}
-    </button>
+    </Button>
   );
 };
