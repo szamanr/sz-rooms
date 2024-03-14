@@ -21,9 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={isDev}>
       <body className={twClass(inter.className, "")}>
-        <main className="flex min-h-screen flex-col items-center justify-between px-4 md:px-8 lg:px-24 py-10">
-          {children}
-        </main>
+        {children}
         {modal}
       </body>
     </html>
