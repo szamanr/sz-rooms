@@ -22,17 +22,26 @@ enum IconSize {
 
 type Props = {
   className?: string;
+  filled?: boolean;
   name: MaterialSymbol;
   size?: keyof typeof IconSize;
 };
 
-export default function Icon({ className, name, size = "base" }: Props) {
+export default function Icon({
+  className,
+  filled,
+  name,
+  size = "base",
+}: Props) {
   // !important needed to overwrite class styles
   const sizeClass = `!${IconSize[size]} !leading-none`;
 
   return (
     <span
       className={twClass("material-symbols-outlined", sizeClass, className)}
+      style={{
+        fontVariationSettings: filled ? `"FILL" 1` : undefined,
+      }}
     >
       {name}
     </span>

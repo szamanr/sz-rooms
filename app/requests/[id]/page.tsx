@@ -38,7 +38,7 @@ const BookingRequest = async ({ params: { id } }: IdRouteParams) => {
     .from("booking_request")
     .select(
       `
-      id, start_date, end_date, room(
+      id, start_date, end_date, status, room(
         id, name, currency, default_price, owner_id
       ), user_id
     `,
@@ -49,6 +49,8 @@ const BookingRequest = async ({ params: { id } }: IdRouteParams) => {
   const request = data?.[0] ?? undefined;
 
   if (!request) return null;
+
+  const { status } = request;
 
   return (
     <main className="flex grow flex-col items-center justify-between">
@@ -67,7 +69,7 @@ const BookingRequest = async ({ params: { id } }: IdRouteParams) => {
         </div>
         <NavigateForward id={nextRequest} />
       </div>
-      <ActionsFooter />
+      <ActionsFooter id={id} nextRequest={nextRequest} status={status} />
     </main>
   );
 };
