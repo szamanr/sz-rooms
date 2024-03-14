@@ -8,7 +8,7 @@ type Props = {
 
 export const Box: React.FC<Props> = ({ children, className }) => {
   return (
-    <div className={twClass("rounded bg-slate-200 p-2.5 w-full", className)}>
+    <div className={twClass("rounded bg-gray-300 p-2.5 w-full", className)}>
       {children}
     </div>
   );

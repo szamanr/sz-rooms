@@ -53,19 +53,23 @@ const BookingRequest = async ({ params: { id } }: IdRouteParams) => {
   if (!request) return null;
 
   return (
-    <div>
-      <div className="flex gap-4">
+    <main className="flex min-h-screen flex-col items-center justify-between">
+      <div className="flex grow">
         <NavigateBack id={previousRequest} />
-        <div className="flex flex-col gap-4 w-screen px-8 md:px-16 lg:px-56">
-          <BasicInfo request={request} />
-          <div className="flex gap-8 justify-between">
-            <UserAbout />
-            <UserProfile />
+        <div className="flex flex-col w-screen">
+          <div className="w-full bg-amber-400 p-8 md:px-16 lg:px-48 flex">
+            <BasicInfo request={request} />
+          </div>
+          <div className="w-full grow bg-slate-200 p-8 md:px-16 lg:px-48">
+            <div className="min-h-[90%] flex gap-8 justify-between">
+              <UserAbout />
+              <UserProfile />
+            </div>
           </div>
         </div>
         <NavigateForward id={nextRequest} />
       </div>
-      <div className="absolute bottom-0 left-0 w-screen p-3 flex justify-center gap-4 sm:gap-24 bg-gray-300">
+      <footer className="h-14 sticky bottom-0 left-0 w-screen p-3 flex justify-center gap-4 sm:gap-24 bg-gray-300 shadow-top">
         <Button className="rounded-full px-6" variant="danger">
           <Icon name="thumb_down" size="xl" />
           <span>{$t("nope")}</span>
@@ -81,8 +85,8 @@ const BookingRequest = async ({ params: { id } }: IdRouteParams) => {
           <Icon name="thumb_up" size="xl" />
           <span>{$t("yup")}</span>
         </Button>
-      </div>
-    </div>
+      </footer>
+    </main>
   );
 };
 
