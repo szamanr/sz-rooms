@@ -17,7 +17,7 @@ const Requests: React.FC<Props> = async ({}) => {
     .from("booking_request")
     .select(
       `
-      id, start_date, end_date, room(
+      id, start_date, end_date, room!inner (
         id, name, currency, default_price, owner_id
       ), user_id
     `,
@@ -28,7 +28,7 @@ const Requests: React.FC<Props> = async ({}) => {
   const requests = data ?? [];
 
   return (
-    <div className="">
+    <div className="w-full">
       <ul>
         <li className="px-2 pb-2 grid grid-cols-5 gap-2">
           <span>{$t("Room")}</span>
@@ -39,7 +39,7 @@ const Requests: React.FC<Props> = async ({}) => {
         </li>
         <For
           each={requests}
-          fallback={<span>{$t("No booking requests")}</span>}
+          fallback={<li className="p-2">{$t("No booking requests")}</li>}
         >
           {({ end_date, id, room, start_date, user_id }) => (
             <li className="even:bg-slate-300 rounded">
