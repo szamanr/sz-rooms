@@ -4,6 +4,7 @@ import { Derive } from "@shoooe/derive";
 import { differenceInDays, format } from "date-fns";
 import { $t } from "@/utils/intl";
 import { Box } from "@/components/layout/Box";
+import Image from "next/image";
 
 type Request = Derive<
   Database["public"]["Tables"]["booking_request"]["Row"],
@@ -32,7 +33,15 @@ export const BasicInfo: React.FC<Props> = ({ request }) => {
 
   return (
     <Box className="flex gap-2 justify-between">
-      <span className="h-full flex items-center">[image]</span>
+      <div className="h-full flex items-center">
+        <Image
+          alt="user image"
+          className="rounded-full"
+          height={150}
+          src="https://fastly.picsum.photos/id/593/200/200.jpg?hmac=E26lTUTkzs_AeuWXrkT-kFTudfYDTVCjgKVE_HDzRmk"
+          width={150}
+        />
+      </div>
       <div>
         <p>{request.user_id}</p>
         <p className="text-lime-500">♂️ 27 years</p>
