@@ -1,6 +1,6 @@
 import React from "react";
 import Icon from "@/components/Icon";
-import Link from "next/link";
+import { Link } from "@/components/navigation/Link";
 
 type Props = {
   id?: number;

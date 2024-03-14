@@ -1,6 +1,6 @@
 import { Database } from "@/api/schema.types";
 import { For } from "@/components/controlFlow/For/For";
-import Link from "next/link";
+import { Link } from "@/components/navigation/Link";
 import Image from "next/image";
 
 type Room = Database["public"]["Tables"]["room"]["Row"];

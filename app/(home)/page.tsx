@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/components/navigation/Link";
 import { $t } from "@/utils/intl";
 import { Show } from "@/components/controlFlow/Show/Show";
 import { supabaseServerClient } from "@/api/supabaseServer";
@@ -10,14 +10,14 @@ export default async function Home() {
 
   return (
     <div>
-      <Link className="hover:text-lime-500" href="/rooms">
+      <Link href="/rooms">
         <p>{$t("Find rooms")}</p>
       </Link>
       <Show when={isLoggedIn}>
-        <Link className="hover:text-lime-500" href="/my-rooms">
+        <Link href="/my-rooms">
           <p>{$t("Manage my rooms")}</p>
         </Link>
-        <Link className="hover:text-lime-500" href="/requests">
+        <Link href="/requests">
           <p>{$t("Booking requests")}</p>
         </Link>
       </Show>

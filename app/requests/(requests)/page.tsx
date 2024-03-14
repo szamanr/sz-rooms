@@ -3,7 +3,7 @@ import { For } from "@/components/controlFlow/For/For";
 import { $t } from "@/utils/intl";
 import { supabaseServerClient } from "@/api/supabaseServer";
 import { differenceInDays, format } from "date-fns";
-import Link from "next/link";
+import { Link } from "@/components/navigation/Link";
 
 type Props = {};
 

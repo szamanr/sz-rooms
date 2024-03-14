@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/components/navigation/Link";
 import Icon from "@/components/Icon";
 import { ParentComponentProps } from "@/utils/componentTypes";
 import { UserInfo } from "@/components/navbar/UserInfo";

@@ -1,6 +1,6 @@
 import React from "react";
 import { twClass } from "@/utils/twClass";
-import Link from "next/link";
+import { Link } from "@/components/navigation/Link";
 import { Url } from "next/dist/shared/lib/router/router";
 
 type Props = React.AnchorHTMLAttributes<HTMLAnchorElement> & {

@@ -8,7 +8,7 @@ import { RoomList } from "@/components/room/RoomList";
 import { redirect } from "next/navigation";
 import { Show } from "@/components/controlFlow/Show/Show";
 import Icon from "@/components/Icon";
-import Link from "next/link";
+import { Link } from "@/components/navigation/Link";
 
 const MyRooms = async ({ searchParams }: SearchParams) => {
   const currentUser = (await supabaseServerClient().auth.getSession()).data
