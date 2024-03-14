@@ -8,11 +8,11 @@ export function Modal({ children }: { children: React.ReactNode }) {
 
   return (
     <div
-      className="absolute z-10 inset-0 w-screen h-screen flex items-center justify-center bg-gray-900/75 backdrop-blur-sm"
+      className="absolute z-modal-backdrop inset-0 w-screen h-screen flex items-center justify-center bg-gray-900/75 backdrop-blur-sm"
       id="modalBackdrop"
     >
       <div
-        className="w-1/3 h-1/3 bg-white rounded p-2 flex flex-col"
+        className="w-1/3 h-1/3 bg-white rounded p-2 flex flex-col z-modal"
         id="modal"
       >
         <div className="w-full flex justify-end">

@@ -5,7 +5,7 @@ import { UserInfo } from "@/components/navbar/UserInfo";
 
 export function NavBar({ children }: ParentComponentProps) {
   return (
-    <nav className="h-10 px-2 py-1 sticky top-0 left-0 flex justify-between w-full bg-gray-300 shadow">
+    <nav className="h-10 px-2 py-1 sticky z-higher top-0 left-0 flex justify-between w-full bg-gray-300">
       <div className="flex items-center">
         <Link className="hover:text-lime-500 flex" href="/">
           <Icon name="home" size="2xl" />
