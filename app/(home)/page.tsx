@@ -17,10 +17,10 @@ export default async function Home() {
         <Link href="/my-rooms">
           <p>{$t("Manage my rooms")}</p>
         </Link>
-        <Link href="/requests">
+        <Link href="/requests/pending">
           <p>{$t("Booking requests")}</p>
         </Link>
-        <Link href="/requests/matches">
+        <Link href="/requests/accepted">
           <p>{$t("My matches")}</p>
         </Link>
         <Link href="/requests/saved">

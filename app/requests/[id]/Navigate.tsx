@@ -3,14 +3,15 @@ import Icon from "@/components/Icon";
 import { Link } from "@/components/navigation/Link";
 
 type Props = {
-  id?: number;
+  href?: string;
+  icon?: React.ComponentProps<typeof Icon>["name"];
 };
 
-export const NavigateBack: React.FC<Props> = ({ id }) => {
-  if (!id) return null;
+export const NavigateBack: React.FC<Props> = ({ href }) => {
+  if (!href) return null;
   return (
     <div className="absolute left-8 top-0 h-screen flex items-center justify-center">
-      <Link href={`/requests/${id}`}>
+      <Link href={href}>
         <Icon
           className="rounded-full bg-gray-500 hover:bg-lime-500 text-white p-3 z-higher"
           name="chevron_left"
@@ -21,14 +22,14 @@ export const NavigateBack: React.FC<Props> = ({ id }) => {
   );
 };
 
-export const NavigateForward: React.FC<Props> = ({ id }) => {
-  if (!id) return null;
+export const NavigateForward: React.FC<Props> = ({ href, icon }) => {
+  if (!href) return null;
   return (
     <div className="absolute right-8 top-0 h-screen flex items-center justify-center">
-      <Link href={`/requests/${id}`}>
+      <Link href={href}>
         <Icon
           className="rounded-full bg-gray-500 hover:bg-lime-500 text-white p-3 z-higher"
-          name="chevron_right"
+          name={icon ?? "chevron_right"}
           size="2xl"
         />
       </Link>

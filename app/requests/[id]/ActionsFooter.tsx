@@ -36,7 +36,7 @@ export const ActionsFooter = ({ id, nextRequest, status }: Props) => {
     if (!!nextRequest) {
       router.push(`/requests/${nextRequest}`);
     } else {
-      router.push("/requests");
+      router.push("/requests/accepted");
       router.refresh();
     }
   };
@@ -48,11 +48,11 @@ export const ActionsFooter = ({ id, nextRequest, status }: Props) => {
   return (
     <footer className="h-14 sticky bottom-0 left-0 w-screen p-3 flex justify-center gap-4 sm:gap-24 bg-gray-300">
       <Button
-        className={twClass("rounded-full px-6", "hover:bg-red-600", {
-          "bg-red-600": rejected,
-        })}
-        disabled={rejected}
-        onClick={updateBookingRequestStatus.bind(null, "rejected")}
+        className={twClass("rounded-full px-6", "hover:bg-red-600")}
+        onClick={updateBookingRequestStatus.bind(
+          null,
+          rejected ? "pending" : "rejected",
+        )}
         variant="danger"
       >
         <Icon name="thumb_down" size="xl" filled={rejected} />
@@ -62,12 +62,11 @@ export const ActionsFooter = ({ id, nextRequest, status }: Props) => {
         className={twClass(
           "rounded-full px-6",
           "bg-gray-300 hover:bg-gray-400 border-2 border-gray-400",
-          {
-            "bg-gray-400": saved,
-          },
         )}
-        disabled={saved}
-        onClick={updateBookingRequestStatus.bind(null, "saved")}
+        onClick={updateBookingRequestStatus.bind(
+          null,
+          saved ? "pending" : "saved",
+        )}
         variant="none"
       >
         <Icon name="bookmark" size="xl" filled={saved} />
@@ -77,12 +76,11 @@ export const ActionsFooter = ({ id, nextRequest, status }: Props) => {
         className={twClass(
           "rounded-full px-6",
           "bg-lime-500 hover:bg-lime-600",
-          {
-            "bg-lime-600": accepted,
-          },
         )}
-        disabled={accepted}
-        onClick={updateBookingRequestStatus.bind(null, "accepted")}
+        onClick={updateBookingRequestStatus.bind(
+          null,
+          accepted ? "pending" : "accepted",
+        )}
         variant="base"
       >
         <Icon name="thumb_up" size="xl" filled={accepted} />
