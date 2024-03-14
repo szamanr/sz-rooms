@@ -1,11 +1,12 @@
 import React from "react";
 import { $t } from "@/utils/intl";
+import { Box } from "@/components/layout/Box";
 
 type Props = {};
 
 export const UserAbout: React.FC<Props> = ({}) => {
   return (
-    <div className="border rounded border-slate-300 border-2 p-2 w-full">
+    <Box>
       <h3>{$t("About me")}</h3>
       <div className="text-justify space-y-2">
         <p>
@@ -16,6 +17,6 @@ export const UserAbout: React.FC<Props> = ({}) => {
         </p>
         <p>vel aut commodi aperiam ut et quas nostrum.</p>
       </div>
-    </div>
+    </Box>
   );
 };

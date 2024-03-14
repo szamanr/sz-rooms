@@ -1,9 +1,9 @@
 import React from "react";
 import { Database } from "@/api/schema.types";
 import { Derive } from "@shoooe/derive";
-import { twClass } from "@/utils/twClass";
 import { differenceInDays, format } from "date-fns";
 import { $t } from "@/utils/intl";
+import { Box } from "@/components/layout/Box";
 
 type Request = Derive<
   Database["public"]["Tables"]["booking_request"]["Row"],
@@ -31,12 +31,7 @@ export const BasicInfo: React.FC<Props> = ({ request }) => {
   const { end_date, start_date } = request;
 
   return (
-    <div
-      className={twClass(
-        "border rounded border-slate-300 border-2 p-2 w-full",
-        "flex gap-2 justify-between",
-      )}
-    >
+    <Box className="flex gap-2 justify-between">
       <span className="h-full flex items-center">[image]</span>
       <div>
         <p>{request.user_id}</p>
@@ -59,6 +54,6 @@ export const BasicInfo: React.FC<Props> = ({ request }) => {
         </p>
         <p>reason for renting: work & travel</p>
       </div>
-    </div>
+    </Box>
   );
 };

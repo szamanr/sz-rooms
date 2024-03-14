@@ -9,7 +9,7 @@ type Props = {
 export const NavigateBack: React.FC<Props> = ({ id }) => {
   if (!id) return null;
   return (
-    <div className="absolute left-8 h-screen flex items-center justify-center">
+    <div className="absolute left-8 top-0 h-screen flex items-center justify-center">
       <Link href={`/requests/${id}`}>
         <Icon
           className="rounded-full bg-gray-600 hover:bg-amber-600 text-white p-3"
@@ -24,7 +24,7 @@ export const NavigateBack: React.FC<Props> = ({ id }) => {
 export const NavigateForward: React.FC<Props> = ({ id }) => {
   if (!id) return null;
   return (
-    <div className="absolute right-8 h-screen flex items-center justify-center">
+    <div className="absolute right-8 top-0 h-screen flex items-center justify-center">
       <Link href={`/requests/${id}`}>
         <Icon
           className="rounded-full bg-gray-600 hover:bg-amber-600 text-white p-3"
