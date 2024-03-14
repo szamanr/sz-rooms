@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { twClass } from "@/utils/twClass";
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "base" | "danger" | "negative";
+  variant?: "none" | "base" | "danger" | "negative";
 };
 
 export const Button = forwardRef<HTMLButtonElement, Props>(

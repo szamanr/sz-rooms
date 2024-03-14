@@ -6,6 +6,9 @@ import { BasicInfo } from "@/app/requests/[id]/BasicInfo";
 import { UserAbout } from "@/app/requests/[id]/UserAbout";
 import { UserProfile } from "@/app/requests/[id]/UserProfile";
 import { isNil } from "lodash";
+import { Button } from "@/components/buttons/Button";
+import Icon from "@/components/Icon";
+import { $t } from "@/utils/intl";
 
 const BookingRequest = async ({ params: { id } }: IdRouteParams) => {
   const currentUser = (await supabaseServerClient().auth.getSession()).data
@@ -50,16 +53,35 @@ const BookingRequest = async ({ params: { id } }: IdRouteParams) => {
   if (!request) return null;
 
   return (
-    <div className="flex gap-4">
-      <NavigateBack id={previousRequest} />
-      <div className="flex flex-col gap-4 w-screen px-8 md:px-16 lg:px-56">
-        <BasicInfo request={request} />
-        <div className="flex gap-8 justify-between">
-          <UserAbout />
-          <UserProfile />
+    <div>
+      <div className="flex gap-4">
+        <NavigateBack id={previousRequest} />
+        <div className="flex flex-col gap-4 w-screen px-8 md:px-16 lg:px-56">
+          <BasicInfo request={request} />
+          <div className="flex gap-8 justify-between">
+            <UserAbout />
+            <UserProfile />
+          </div>
         </div>
+        <NavigateForward id={nextRequest} />
       </div>
-      <NavigateForward id={nextRequest} />
+      <div className="absolute bottom-0 left-0 w-screen p-3 flex justify-center gap-4 sm:gap-24 bg-gray-300">
+        <Button className="rounded-full px-6" variant="danger">
+          <Icon name="thumb_down" size="xl" />
+          <span>{$t("nope")}</span>
+        </Button>
+        <Button
+          className="rounded-full px-6 bg-gray-300 hover:bg-gray-400 border border-gray-100"
+          variant="none"
+        >
+          <Icon name="bookmark" size="xl" />
+          <span>{$t("save")}</span>
+        </Button>
+        <Button className="rounded-full px-6">
+          <Icon name="thumb_up" size="xl" />
+          <span>{$t("yup")}</span>
+        </Button>
+      </div>
     </div>
   );
 };
