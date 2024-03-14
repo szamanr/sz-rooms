@@ -20,7 +20,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning={isDev}>
-      <body className={twClass(inter.className, "")}>
+      <body className={twClass(inter.className, "min-h-svh")}>
         {children}
         {modal}
       </body>
