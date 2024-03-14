@@ -54,6 +54,7 @@ export type Database = {
           id: number
           room_id: number
           start_date: string
+          status: Database["public"]["Enums"]["booking_request_status"]
           user_id: string
         }
         Insert: {
@@ -62,6 +63,7 @@ export type Database = {
           id?: number
           room_id: number
           start_date: string
+          status?: Database["public"]["Enums"]["booking_request_status"]
           user_id?: string
         }
         Update: {
@@ -70,6 +72,7 @@ export type Database = {
           id?: number
           room_id?: number
           start_date?: string
+          status?: Database["public"]["Enums"]["booking_request_status"]
           user_id?: string
         }
         Relationships: [
@@ -144,6 +147,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
+      booking_request_status: "pending" | "accepted" | "rejected" | "saved"
       currency: "EUR" | "USD"
       room_type: "room" | "flat"
     }
