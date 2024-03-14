@@ -35,7 +35,7 @@ export const BasicInfo: React.FC<Props> = ({ request }) => {
       <span className="h-full flex items-center">[image]</span>
       <div>
         <p>{request.user_id}</p>
-        <p className="text-amber-500">♂️ 27 years</p>
+        <p className="text-lime-500">♂️ 27 years</p>
         <p>💼 work (self-employed) & study (MSc)</p>
         <p>member since 3 months</p>
         <p>been to: madrid, barcelona</p>

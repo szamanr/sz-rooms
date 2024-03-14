@@ -8,8 +8,8 @@ const Tag: React.FC<{ children?: React.ReactNode; highlight?: boolean }> = ({
   highlight,
 }) => (
   <span
-    className={twClass("px-2 py-1 rounded-full border border-slate-500", {
-      "text-amber-500 border-amber-500": highlight,
+    className={twClass("px-2 py-1 rounded-full border border-stone-500", {
+      "text-lime-500 border-lime-500": highlight,
     })}
   >
     {children}

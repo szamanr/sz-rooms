@@ -55,10 +55,10 @@ const BookingRequest = async ({ params: { id } }: IdRouteParams) => {
       <div className="flex grow">
         <NavigateBack id={previousRequest} />
         <div className="flex flex-col w-screen">
-          <div className="w-full bg-amber-400 p-8 md:px-16 lg:px-48 flex">
+          <div className="w-full bg-lime-300 p-8 md:px-16 lg:px-48 flex">
             <BasicInfo request={request} />
           </div>
-          <div className="w-full grow bg-slate-200 p-8 md:px-16 lg:px-48">
+          <div className="w-full grow bg-stone-200 p-8 md:px-16 lg:px-48">
             <div className="min-h-[90%] flex gap-8 justify-between">
               <UserAbout />
               <UserProfile />

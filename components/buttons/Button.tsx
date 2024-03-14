@@ -18,9 +18,9 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
           "text-left font-semibold",
           "rounded",
           {
-            "bg-amber-500 text-white hover:bg-amber-600": variant === "base",
+            "bg-lime-500 text-white hover:bg-lime-600": variant === "base",
             "bg-red-500 text-white hover:bg-red-600": variant === "danger",
-            "hover:text-amber-500": variant === "negative",
+            "hover:text-lime-500": variant === "negative",
           },
           className,
         )}

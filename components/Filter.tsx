@@ -32,7 +32,7 @@ export const Filter = ({ name, options, value }: Props) => {
         <div className="relative">
           <Listbox.Button
             className={twClass("rounded-xl border px-2 py-1 border-gray-400", {
-              "bg-amber-100 border-amber-500": selectedValue.length,
+              "bg-lime-100 border-lime-500": selectedValue.length,
             })}
           >
             {name}
@@ -47,8 +47,8 @@ export const Filter = ({ name, options, value }: Props) => {
                       className={twClass(
                         "select-none cursor-pointer px-2 py-1 flex items-center",
                         {
-                          "bg-amber-300": selected,
-                          "bg-amber-100": active,
+                          "bg-lime-300": selected,
+                          "bg-lime-100": active,
                         },
                       )}
                     >
@@ -63,7 +63,7 @@ export const Filter = ({ name, options, value }: Props) => {
             </For>
             <Listbox.Button className="w-full">
               <div
-                className="px-2 py-1 border-t border-black w-full hover:bg-amber-500"
+                className="px-2 py-1 border-t border-black w-full hover:bg-lime-500"
                 onClick={handleSelect}
               >
                 {$t("filter")}

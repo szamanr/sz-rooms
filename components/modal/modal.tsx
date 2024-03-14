@@ -16,7 +16,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
         id="modal"
       >
         <div className="w-full flex justify-end">
-          <button className="hover:text-amber-500" onClick={router.back}>
+          <button className="hover:text-lime-500" onClick={router.back}>
             <Icon name="close" />
           </button>
         </div>

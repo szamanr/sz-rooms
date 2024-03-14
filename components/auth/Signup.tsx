@@ -38,7 +38,7 @@ const Signup = () => {
         {/*</Show>*/}
 
         <button
-          className="bg-amber-500 text-white rounded px-2 py-1 font-semibold hover:bg-amber-600 flex items-center gap-2"
+          className="bg-lime-500 text-white rounded px-2 py-1 font-semibold hover:bg-lime-600 flex items-center gap-2"
           onClick={setLoading.bind(null, true)}
           type="submit"
         >

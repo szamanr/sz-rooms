@@ -10,14 +10,14 @@ export default async function Home() {
 
   return (
     <div>
-      <Link href="/rooms">
+      <Link className="hover:text-lime-500" href="/rooms">
         <p>{$t("Find rooms")}</p>
       </Link>
       <Show when={isLoggedIn}>
-        <Link href="/my-rooms">
+        <Link className="hover:text-lime-500" href="/my-rooms">
           <p>{$t("Manage my rooms")}</p>
         </Link>
-        <Link href="/requests">
+        <Link className="hover:text-lime-500" href="/requests">
           <p>{$t("Booking requests")}</p>
         </Link>
       </Show>
