@@ -6,6 +6,7 @@ import { BasicInfo } from "@/app/requests/[id]/BasicInfo";
 import { UserAbout } from "@/app/requests/[id]/UserAbout";
 import { UserProfile } from "@/app/requests/[id]/UserProfile";
 import { isNil } from "lodash";
+import { ActionsFooter } from "@/app/requests/[id]/ActionsFooter";
 
 const BookingRequest = async ({ params: { id } }: IdRouteParams) => {
   const currentUser = (await supabaseServerClient().auth.getSession()).data
@@ -50,17 +51,24 @@ const BookingRequest = async ({ params: { id } }: IdRouteParams) => {
   if (!request) return null;
 
   return (
-    <div className="flex gap-4">
-      <NavigateBack id={previousRequest} />
-      <div className="flex flex-col gap-4 w-screen px-8 md:px-16 lg:px-56">
-        <BasicInfo request={request} />
-        <div className="flex gap-8 justify-between">
-          <UserAbout />
-          <UserProfile />
+    <main className="flex grow flex-col items-center justify-between">
+      <div className="flex grow">
+        <NavigateBack id={previousRequest} />
+        <div className="flex flex-col w-screen">
+          <div className="w-full bg-lime-300 p-8 md:px-16 lg:px-48 flex">
+            <BasicInfo request={request} />
+          </div>
+          <div className="w-full grow bg-stone-200 p-8 md:px-16 lg:px-48">
+            <div className="min-h-[90%] flex gap-8 justify-between">
+              <UserAbout />
+              <UserProfile />
+            </div>
+          </div>
         </div>
+        <NavigateForward id={nextRequest} />
       </div>
-      <NavigateForward id={nextRequest} />
-    </div>
+      <ActionsFooter />
+    </main>
   );
 };
 

@@ -1,15 +1,14 @@
 import { ParentComponentProps } from "@/utils/componentTypes";
 import { NavBar } from "@/components/navbar/NavBar";
 import { BackLink } from "@/components/navigation/BackLink";
-import { Page } from "@/components/layout/Page";
 
 export default function Layout({ children }: ParentComponentProps) {
   return (
-    <div>
+    <div className="flex flex-col h-svh">
       <NavBar>
         <BackLink size="2xl" />
       </NavBar>
-      <Page>{children}</Page>
+      {children}
     </div>
   );
 }

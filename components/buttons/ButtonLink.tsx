@@ -1,6 +1,6 @@
 import React from "react";
 import { twClass } from "@/utils/twClass";
-import Link from "next/link";
+import { Link } from "@/components/navigation/Link";
 import { Url } from "next/dist/shared/lib/router/router";
 
 type Props = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
@@ -20,7 +20,7 @@ export const ButtonLink: React.FC<Props> = ({
       className={twClass(
         "flex items-center gap-2 px-2 py-1 w-fit",
         "text-left font-semibold",
-        "bg-amber-500 text-white rounded hover:bg-amber-600",
+        "bg-lime-500 text-white rounded hover:bg-lime-600",
         className,
       )}
       href={href}

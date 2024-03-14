@@ -1,11 +1,12 @@
 import { ParentComponentProps } from "@/utils/componentTypes";
 import { NavBar } from "@/components/navbar/NavBar";
+import { Page } from "@/components/layout/Page";
 
 export default function Layout({ children }: ParentComponentProps) {
   return (
     <div>
       <NavBar />
-      {children}
+      <Page>{children}</Page>
     </div>
   );
 }

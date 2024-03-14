@@ -1,9 +1,10 @@
 import React from "react";
 import { Database } from "@/api/schema.types";
 import { Derive } from "@shoooe/derive";
-import { twClass } from "@/utils/twClass";
 import { differenceInDays, format } from "date-fns";
 import { $t } from "@/utils/intl";
+import { Box } from "@/components/layout/Box";
+import Image from "next/image";
 
 type Request = Derive<
   Database["public"]["Tables"]["booking_request"]["Row"],
@@ -31,16 +32,19 @@ export const BasicInfo: React.FC<Props> = ({ request }) => {
   const { end_date, start_date } = request;
 
   return (
-    <div
-      className={twClass(
-        "border rounded border-slate-300 border-2 p-2 w-full",
-        "flex gap-2 justify-between",
-      )}
-    >
-      <span className="h-full flex items-center">[image]</span>
+    <Box className="flex gap-2 justify-between">
+      <div className="h-full flex items-center">
+        <Image
+          alt="user image"
+          className="rounded-full"
+          height={150}
+          src="https://fastly.picsum.photos/id/593/200/200.jpg?hmac=E26lTUTkzs_AeuWXrkT-kFTudfYDTVCjgKVE_HDzRmk"
+          width={150}
+        />
+      </div>
       <div>
         <p>{request.user_id}</p>
-        <p className="text-amber-500">♂️ 27 years</p>
+        <p className="text-lime-500">♂️ 27 years</p>
         <p>💼 work (self-employed) & study (MSc)</p>
         <p>member since 3 months</p>
         <p>been to: madrid, barcelona</p>
@@ -59,6 +63,6 @@ export const BasicInfo: React.FC<Props> = ({ request }) => {
         </p>
         <p>reason for renting: work & travel</p>
       </div>
-    </div>
+    </Box>
   );
 };

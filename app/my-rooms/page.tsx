@@ -8,7 +8,7 @@ import { RoomList } from "@/components/room/RoomList";
 import { redirect } from "next/navigation";
 import { Show } from "@/components/controlFlow/Show/Show";
 import Icon from "@/components/Icon";
-import Link from "next/link";
+import { Link } from "@/components/navigation/Link";
 
 const MyRooms = async ({ searchParams }: SearchParams) => {
   const currentUser = (await supabaseServerClient().auth.getSession()).data
@@ -47,7 +47,7 @@ const MyRooms = async ({ searchParams }: SearchParams) => {
       <RoomList roomHref={(id) => `/rooms/${id}/admin`} rooms={rooms}>
         <Show when={canAddRooms}>
           <Link
-            className="size-full min-w-20 min-h-20 flex flex-col justify-center items-center text-gray-500 hover:text-amber-500"
+            className="size-full min-w-20 min-h-20 flex flex-col justify-center items-center text-gray-500 hover:text-lime-500"
             href="/rooms/add"
           >
             <Icon name="add" size="2xl" />

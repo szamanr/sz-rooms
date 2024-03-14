@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/components/navigation/Link";
 import { $t } from "@/utils/intl";
 import { Show } from "@/components/controlFlow/Show/Show";
 import { supabaseServerClient } from "@/api/supabaseServer";
