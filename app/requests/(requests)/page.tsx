@@ -42,10 +42,11 @@ const Requests: React.FC<Props> = async ({}) => {
           fallback={<li className="p-2">{$t("No booking requests")}</li>}
         >
           {({ end_date, id, room, start_date, user_id }) => (
-            <li className="even:bg-lime-300 rounded">
+            <li className="hover:bg-stone-200 even:bg-lime-300 even:hover:bg-lime-400 rounded">
               <Link
                 className="p-2 grid grid-cols-5 gap-2"
                 href={`/requests/${id}`}
+                variant="none"
               >
                 <span>{room?.name}</span>
                 <span>
