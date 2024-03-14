@@ -20,6 +20,12 @@ export default async function Home() {
         <Link href="/requests">
           <p>{$t("Booking requests")}</p>
         </Link>
+        <Link href="/requests/matches">
+          <p>{$t("My matches")}</p>
+        </Link>
+        <Link href="/requests/saved">
+          <p>{$t("Saved requests")}</p>
+        </Link>
       </Show>
     </div>
   );
