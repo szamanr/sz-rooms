@@ -23,7 +23,9 @@ const Requests: React.FC<Props> = async ({}) => {
     `,
     )
     .eq("room.owner_id", currentUser.id)
-    .order("start_date");
+    .eq("status", "pending")
+    .order("start_date")
+    .order("id");
 
   const requests = data ?? [];
 
@@ -39,7 +41,9 @@ const Requests: React.FC<Props> = async ({}) => {
         </li>
         <For
           each={requests}
-          fallback={<li className="p-2">{$t("No booking requests")}</li>}
+          fallback={
+            <li className="p-2">{$t("No pending booking requests")}</li>
+          }
         >
           {({ end_date, id, room, start_date, user_id }) => (
             <li className="hover:bg-stone-200 even:bg-lime-300 even:hover:bg-lime-400 rounded">
