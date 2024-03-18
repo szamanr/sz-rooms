@@ -1,10 +1,17 @@
 import React from "react";
 import { Database } from "@/api/schema.types";
 import { Derive } from "@shoooe/derive";
-import { differenceInDays, format } from "date-fns";
+import {
+  differenceInDays,
+  differenceInYears,
+  format,
+  formatDistanceToNow,
+} from "date-fns";
 import { $t } from "@/utils/intl";
 import { Box } from "@/components/layout/Box";
 import Image from "next/image";
+import { Show } from "@/components/controlFlow/Show/Show";
+import { AvatarPlaceholder } from "@/components/placeholders/AvatarPlaceholder";
 
 type Request = Derive<
   Database["public"]["Tables"]["booking_request"]["Row"],
@@ -24,29 +31,58 @@ type Request = Derive<
   >;
 };
 
+type User = Derive<
+  Database["public"]["Tables"]["user"]["Row"],
+  {
+    avatar: true;
+    birthday: true;
+    created_at: true;
+    gender: true;
+    name: true;
+  }
+>;
+
 type Props = {
   request: Request;
+  user: User;
 };
 
-export const BasicInfo: React.FC<Props> = ({ request }) => {
+export const BasicInfo: React.FC<Props> = ({ request, user }) => {
   const { end_date, start_date } = request;
+  const { avatar, birthday, created_at, gender, name } = user;
+  const memberSince = formatDistanceToNow(created_at);
+  const age = birthday ? differenceInYears(new Date(), birthday) : undefined;
 
   return (
     <Box className="flex gap-2 justify-between">
       <div className="h-full flex items-center">
-        <Image
-          alt="user image"
-          className="rounded-full"
-          height={150}
-          src="https://fastly.picsum.photos/id/593/200/200.jpg?hmac=E26lTUTkzs_AeuWXrkT-kFTudfYDTVCjgKVE_HDzRmk"
-          width={150}
-        />
+        <Show
+          when={avatar}
+          fallback={<AvatarPlaceholder name={name ?? "XY"} />}
+        >
+          {(userPhoto) => (
+            <Image
+              alt="user image"
+              className="rounded-full"
+              height={150}
+              src={userPhoto}
+              width={150}
+            />
+          )}
+        </Show>
       </div>
       <div>
-        <p>{request.user_id}</p>
-        <p className="text-lime-500">♂️ 27 years</p>
+        <p>{name}</p>
+        <p className="text-lime-500 space-x-1">
+          <Show when={gender && ["female", "male"].includes(gender)}>
+            <span>{gender === "female" ? "♀️" : "♂️"}</span>
+          </Show>
+          <Show when={age}>
+            {(age) => <span>{$t("{age} years", { age })}</span>}
+          </Show>
+        </p>
         <p>💼 work (self-employed) & study (MSc)</p>
-        <p>member since 3 months</p>
+        <p>member since {memberSince}</p>
         <p>been to: madrid, barcelona</p>
       </div>
       <div>

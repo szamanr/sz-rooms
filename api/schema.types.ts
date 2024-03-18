@@ -139,6 +139,44 @@ export type Database = {
           }
         ]
       }
+      user: {
+        Row: {
+          about: string | null
+          avatar: string | null
+          birthday: string | null
+          created_at: string
+          gender: Database["public"]["Enums"]["gender"] | null
+          id: string
+          name: string | null
+        }
+        Insert: {
+          about?: string | null
+          avatar?: string | null
+          birthday?: string | null
+          created_at?: string
+          gender?: Database["public"]["Enums"]["gender"] | null
+          id?: string
+          name?: string | null
+        }
+        Update: {
+          about?: string | null
+          avatar?: string | null
+          birthday?: string | null
+          created_at?: string
+          gender?: Database["public"]["Enums"]["gender"] | null
+          id?: string
+          name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_user_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -149,6 +187,7 @@ export type Database = {
     Enums: {
       booking_request_status: "pending" | "accepted" | "rejected" | "saved"
       currency: "EUR" | "USD"
+      gender: "male" | "female" | "other"
       room_type: "room" | "flat"
     }
     CompositeTypes: {
