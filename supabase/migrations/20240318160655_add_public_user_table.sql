@@ -1,10 +1,13 @@
+create type "public"."gender" as enum ('male', 'female', 'other');
+
 create table "public"."user" (
     "created_at" timestamp with time zone not null default now(),
     "id" uuid not null default gen_random_uuid(),
     "name" text,
     "avatar" text,
     "birthday" date,
-    "about" text
+    "about" text,
+    "gender" gender
 );
 
 

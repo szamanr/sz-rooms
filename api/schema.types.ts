@@ -145,6 +145,7 @@ export type Database = {
           avatar: string | null
           birthday: string | null
           created_at: string
+          gender: Database["public"]["Enums"]["gender"] | null
           id: string
           name: string | null
         }
@@ -153,6 +154,7 @@ export type Database = {
           avatar?: string | null
           birthday?: string | null
           created_at?: string
+          gender?: Database["public"]["Enums"]["gender"] | null
           id?: string
           name?: string | null
         }
@@ -161,6 +163,7 @@ export type Database = {
           avatar?: string | null
           birthday?: string | null
           created_at?: string
+          gender?: Database["public"]["Enums"]["gender"] | null
           id?: string
           name?: string | null
         }
@@ -184,6 +187,7 @@ export type Database = {
     Enums: {
       booking_request_status: "pending" | "accepted" | "rejected" | "saved"
       currency: "EUR" | "USD"
+      gender: "male" | "female" | "other"
       room_type: "room" | "flat"
     }
     CompositeTypes: {
