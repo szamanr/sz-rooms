@@ -61,7 +61,16 @@ const BookingRequest = async ({
 
   if (!request) return null;
 
-  const { status } = request;
+  const { status, user_id } = request;
+
+  const { data: userData } = await supabaseServerClient()
+    .from("user")
+    .select("id, about, avatar, birthday, created_at, gender, name")
+    .eq("id", user_id)
+    .limit(1);
+
+  const user = userData?.[0] ?? undefined;
+  if (!user) return null;
 
   return (
     <main className="flex grow flex-col items-center justify-between">
@@ -75,11 +84,11 @@ const BookingRequest = async ({
         />
         <div className="flex flex-col w-screen">
           <div className="w-full bg-lime-300 p-8 md:px-16 lg:px-48 flex">
-            <BasicInfo request={request} />
+            <BasicInfo request={request} user={user} />
           </div>
           <div className="w-full grow bg-stone-200 p-8 md:px-16 lg:px-48">
             <div className="min-h-[90%] flex gap-8 justify-between">
-              <UserAbout />
+              <UserAbout user={user} />
               <UserProfile />
             </div>
           </div>
