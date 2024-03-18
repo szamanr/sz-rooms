@@ -6,6 +6,7 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
+    "make-migration": "supabase db diff --linked -f",
     "schema-generate": "supabase gen types typescript --project-id qsfwkcrawusebbsdkimj > api/schema.types.ts",
     "start": "next start"
   },
