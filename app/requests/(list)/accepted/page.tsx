@@ -17,7 +17,7 @@ const Matches: React.FC<Props> = async ({}) => {
       `
       id, start_date, end_date, room!inner (
         id, name, currency, default_price, owner_id
-      ), user_id
+      ), user ( name ), user_id
     `,
     )
     .eq("room.owner_id", currentUser.id)

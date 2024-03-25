@@ -14,6 +14,7 @@ export const Link: React.FC<Props> = ({
   return (
     <NextLink
       className={twClass(
+        "flex items-center",
         {
           "text-lime-500 hover:text-lime-600": variant === "base",
           "text-black hover:text-lime-500": variant === "negative",

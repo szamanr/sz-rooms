@@ -7,6 +7,7 @@ import { UserAbout } from "@/app/requests/[id]/UserAbout";
 import { UserProfile } from "@/app/requests/[id]/UserProfile";
 import { isNil } from "lodash";
 import { ActionsFooter } from "@/app/requests/[id]/ActionsFooter";
+import { getUserData } from "@/utils/getUserData";
 
 const BookingRequest = async ({
   params: { id },
@@ -63,13 +64,7 @@ const BookingRequest = async ({
 
   const { status, user_id } = request;
 
-  const { data: userData } = await supabaseServerClient()
-    .from("user")
-    .select("id, about, avatar, birthday, created_at, gender, name")
-    .eq("id", user_id)
-    .limit(1);
-
-  const user = userData?.[0] ?? undefined;
+  const user = await getUserData(user_id);
   if (!user) return null;
 
   return (
