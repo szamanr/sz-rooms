@@ -9,6 +9,15 @@ export default async function Home() {
     .session?.user;
   const isLoggedIn = !!currentUser;
 
+  const roomsResponse = currentUser
+    ? await supabaseServerClient()
+        .from("room")
+        .select("*", { count: "exact" })
+        .eq("owner_id", currentUser?.id)
+        .order("created_at", { ascending: false })
+    : undefined;
+  const hasRooms = !!(roomsResponse?.count ?? 0);
+
   return (
     <div className="flex space-x-16">
       <div className="flex flex-col">
@@ -33,15 +42,17 @@ export default async function Home() {
           <Link href="/my-rooms">
             <p>{$t("Manage my rooms")}</p>
           </Link>
-          <Link href="/requests/pending">
-            <p>{$t("Booking requests")}</p>
-          </Link>
-          <Link href="/requests/accepted">
-            <p>{$t("My matches")}</p>
-          </Link>
-          <Link href="/requests/saved">
-            <p>{$t("Saved requests")}</p>
-          </Link>
+          <Show when={hasRooms}>
+            <Link href="/requests/pending">
+              <p>{$t("Booking requests")}</p>
+            </Link>
+            <Link href="/requests/accepted">
+              <p>{$t("My matches")}</p>
+            </Link>
+            <Link href="/requests/saved">
+              <p>{$t("Saved requests")}</p>
+            </Link>
+          </Show>
         </div>
       </Show>
     </div>
