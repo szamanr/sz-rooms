@@ -9,15 +9,23 @@ import { Derive } from "@shoooe/derive";
 type Request = Derive<
   Database["public"]["Tables"]["booking_request"]["Row"],
   {
-    id: true;
-    user_id: true;
-    start_date: true;
     end_date: true;
+    id: true;
+    start_date: true;
+    user_id: true;
   }
 > & {
   room: Maybe<
     Derive<
       Database["public"]["Tables"]["room"]["Row"],
+      {
+        name: true;
+      }
+    >
+  >;
+  user: Maybe<
+    Derive<
+      Database["public"]["Tables"]["user"]["Row"],
       {
         name: true;
       }
@@ -46,7 +54,7 @@ export const RequestList: React.FC<Props> = ({
         <span>{$t("Guest")}</span>
       </li>
       <For each={requests} fallback={<li className="p-2">{fallback}</li>}>
-        {({ end_date, id, room, start_date, user_id }) => (
+        {({ end_date, id, room, start_date, user, user_id }) => (
           <li className="hover:bg-stone-200 even:bg-lime-300 even:hover:bg-lime-400 rounded">
             <Link
               className="p-2 grid grid-cols-5 gap-2"
@@ -61,7 +69,7 @@ export const RequestList: React.FC<Props> = ({
               </span>
               <span>{format(start_date, "dd MMM yyyy")}</span>
               <span>{format(end_date, "dd MMM yyyy")}</span>
-              <span>{user_id}</span>
+              <span>{user?.name ?? user_id}</span>
             </Link>
           </li>
         )}
