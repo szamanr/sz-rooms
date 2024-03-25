@@ -4,6 +4,7 @@ import { $t } from "@/utils/intl";
 import { supabaseServerClient } from "@/api/supabaseServer";
 import { LogoutButton } from "@/components/navbar/LogoutButton";
 import { Link } from "@/components/navigation/Link";
+import Icon from "@/components/Icon";
 
 export const LogInButton: React.FC = () => {
   return (
@@ -15,22 +16,19 @@ export const LogInButton: React.FC = () => {
 };
 
 export const UserInfo: React.FC = async () => {
-  const user = (await supabaseServerClient().auth.getSession()).data.session
-    ?.user;
+  const currentUser = (await supabaseServerClient().auth.getSession()).data
+    .session?.user;
 
   return (
     <div>
-      <Show when={user} fallback={<LogInButton />}>
-        {(user) => (
-          <div className="flex items-center space-x-1">
-            <Link href="/my-profile">
-              <span>
-                {$t("user")}: {user.email}
-              </span>
-            </Link>
-            <LogoutButton />
-          </div>
-        )}
+      <Show when={currentUser} fallback={<LogInButton />}>
+        <div className="flex items-center space-x-1">
+          <Link href="/my-profile">
+            <Icon name="person" size="xl" />
+            <span>{$t("My profile")}</span>
+          </Link>
+          <LogoutButton />
+        </div>
       </Show>
     </div>
   );
