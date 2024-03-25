@@ -53,7 +53,10 @@ export const RequestList: React.FC<Props> = ({
         <span>{$t("End date")}</span>
         <span>{$t("Guest")}</span>
       </li>
-      <For each={requests} fallback={<li className="p-2">{fallback}</li>}>
+      <For
+        each={requests}
+        fallback={<li className="p-2 text-gray-500">{fallback}</li>}
+      >
         {({ end_date, id, room, start_date, user, user_id }) => (
           <li className="hover:bg-stone-200 even:bg-lime-300 even:hover:bg-lime-400 rounded">
             <Link
