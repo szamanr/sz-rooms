@@ -23,7 +23,7 @@ export const UserInfo: React.FC = async () => {
       <Show when={user} fallback={<LogInButton />}>
         {(user) => (
           <div className="flex items-center space-x-1">
-            <Link href="/my-rooms">
+            <Link href="/my-profile">
               <span>
                 {$t("user")}: {user.email}
               </span>
