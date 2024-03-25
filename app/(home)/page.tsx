@@ -18,6 +18,18 @@ export default async function Home() {
     : undefined;
   const hasRooms = !!(roomsResponse?.count ?? 0);
 
+  const requestsResponse = currentUser
+    ? await supabaseServerClient()
+        .from("booking_request")
+        .select(
+          `status, room!inner ( 
+            owner_id
+           )`,
+        )
+        .eq("room.owner_id", currentUser.id)
+    : undefined;
+  const requests = requestsResponse?.data ?? [];
+
   return (
     <div className="flex space-x-16">
       <div className="flex flex-col">
@@ -43,14 +55,36 @@ export default async function Home() {
             <p>{$t("Manage my rooms")}</p>
           </Link>
           <Show when={hasRooms}>
-            <Link href="/requests/pending">
+            <Link className="space-x-1" href="/requests/pending">
               <p>{$t("Booking requests")}</p>
+              <Show when={requestsResponse}>
+                <span className="text-gray-500">
+                  (
+                  {requests.filter(({ status }) => status === "pending").length}
+                  )
+                </span>
+              </Show>
             </Link>
-            <Link href="/requests/accepted">
+            <Link className="space-x-1" href="/requests/accepted">
               <p>{$t("My matches")}</p>
+              <Show when={requestsResponse}>
+                <span className="text-gray-500">
+                  (
+                  {
+                    requests.filter(({ status }) => status === "accepted")
+                      .length
+                  }
+                  )
+                </span>
+              </Show>
             </Link>
-            <Link href="/requests/saved">
+            <Link className="space-x-1" href="/requests/saved">
               <p>{$t("Saved requests")}</p>
+              <Show when={requestsResponse}>
+                <span className="text-gray-500">
+                  ({requests.filter(({ status }) => status === "saved").length})
+                </span>
+              </Show>
             </Link>
           </Show>
         </div>
