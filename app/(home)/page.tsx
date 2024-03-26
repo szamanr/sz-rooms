@@ -32,25 +32,19 @@ export default async function Home() {
 
   return (
     <div className="flex space-x-16">
-      <div className="flex flex-col">
+      <div className="flex flex-col space-y-2">
         <Icon className="text-lime-500 self-center" name="house" size="3xl" />
-        <h3>
-          <span>{$t("Find a place")}</span>
-        </h3>
         <Link href="/rooms">
           <p>{$t("Find rooms")}</p>
         </Link>
       </div>
       <Show when={isLoggedIn}>
-        <div className="flex flex-col">
+        <div className="flex flex-col space-y-2">
           <Icon
             className="text-lime-500 self-center"
             name="person"
             size="3xl"
           />
-          <h3>
-            <span>{$t("Find a roommate")}</span>
-          </h3>
           <Link href="/my-rooms">
             <p>{$t("Manage my rooms")}</p>
           </Link>
