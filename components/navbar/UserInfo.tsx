@@ -8,7 +8,7 @@ import Icon from "@/components/Icon";
 
 export const LogInButton: React.FC = () => {
   return (
-    <div className="divide-x divide-gray-300 *:px-1">
+    <div className="flex divide-x divide-gray-300 *:px-1">
       <Link href="/signup">{$t("Sign up")}</Link>
       <Link href="/login">{$t("Log in")}</Link>
     </div>
